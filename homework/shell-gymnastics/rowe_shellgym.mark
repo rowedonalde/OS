@@ -1,0 +1,526 @@
+#Assignment 0202
+##Don Rowe
+
+##Process Survey
+1. There are very many processes running as root, likely because I normally
+   work as root on my MacBook.
+   
+   Command:
+   ps -U root
+   
+   Output:
+   
+  PID TTY           TIME CMD
+    1 ??         0:04.93 /sbin/launchd
+   10 ??         0:01.55 /usr/libexec/kextd
+   11 ??         0:48.73 /usr/sbin/DirectoryService
+   12 ??         0:28.15 /usr/sbin/notifyd
+   13 ??         4:48.65 /usr/sbin/syslogd
+   14 ??         0:42.29 /usr/sbin/configd
+   20 ??         0:02.14 /usr/sbin/securityd -i
+   24 ??         0:27.42 /usr/sbin/ntpd -c /private/etc/ntp-restrict.conf -n -g
+   25 ??         0:15.30 /usr/sbin/httpd -D FOREGROUND
+   26 ??         0:00.69 /usr/sbin/cron
+   28 ??         6:57.65 /usr/sbin/update
+   29 ??         0:00.01 /sbin/SystemStarter
+   33 ??         7:51.41 /System/Library/Frameworks/CoreServices.framework/Fram
+   34 ??         0:03.23 /System/Library/CoreServices/loginwindow.app/Contents/
+   35 ??         0:00.01 /usr/sbin/KernelEventAgent
+   36 ??         0:22.73 /usr/sbin/kdcmond -n -a
+   38 ??         0:00.01 /usr/libexec/hidd
+   39 ??         0:46.77 /System/Library/Frameworks/CoreServices.framework/Vers
+   41 ??         0:00.32 /sbin/dynamic_pager -F /private/var/vm/swapfile
+   44 ??         0:02.40 /usr/sbin/diskarbitrationd
+   48 ??         0:00.07 autofsd
+   50 ??         0:07.11 /usr/libexec/ApplicationFirewall/socketfilterfw
+   52 ??         0:01.62 /usr/sbin/blued
+   59 ??         0:31.67 /System/Library/CoreServices/coreservicesd
+   69 ??         0:00.10 /usr/sbin/krb5kdc -n -r LKDC:SHA1.9DC4032DC770C0658F7A
+   70 ??        34:30.07 /System/Library/Frameworks/ApplicationServices.framewo
+   94 ??         0:00.11 ./privoxy --pidfile /var/run/Privoxy.pid config
+   96 ??         0:00.13 /Library/Frameworks/HPServicesInterface.framework/Runt
+  118 ??         0:00.53 /Library/Application Support/VMware Fusion/vmnet-natd 
+  124 ??         0:00.55 /Library/Application Support/VMware Fusion/vmnet-dhcpd
+  126 ??         0:00.00 /Library/Application Support/VMware Fusion/vmnet-netif
+  129 ??         0:00.00 /Library/Application Support/VMware Fusion/vmnet-netif
+  134 ??         0:00.45 /Library/Application Support/VMware Fusion/vmnet-dhcpd
+  136 ??         0:00.02 /Library/Application Support/VMware Fusion/vmnet-bridg
+  145 ??         0:00.50 /System/Library/CoreServices/AirPort Base Station Agen
+  149 ??         0:06.38 /System/Library/CoreServices/Spotlight.app/Contents/Ma
+  150 ??         0:01.07 /usr/sbin/UserEventAgent -l Aqua
+  152 ??         0:00.01 /usr/sbin/pboard
+  153 ??         0:35.75 /System/Library/CoreServices/Dock.app/Contents/MacOS/D
+  155 ??         0:21.09 /System/Library/Frameworks/ApplicationServices.framewo
+  156 ??         0:06.87 /usr/sbin/coreaudiod
+  157 ??         2:35.44 /System/Library/CoreServices/SystemUIServer.app/Conten
+  158 ??         9:48.74 /System/Library/CoreServices/Finder.app/Contents/MacOS
+  162 ??         0:18.03 /Library/Printers/hp/hpio/HPEventHandler.app/Contents/
+  165 ??         0:20.85 /Library/Application Support/Hewlett-Packard/Customer 
+  166 ??         0:00.45 /Applications/iTunes.app/Contents/MacOS/iTunesHelper.a
+  168 ??         0:02.71 /Applications/Microsoft AutoUpdate.app/Contents/MacOS/
+  226 ??         0:02.56 /System/Library/Services/AppleSpell.service/Contents/M
+ 1051 ??        13:52.90 /Applications/TextWrangler.app/Contents/MacOS/TextWran
+ 1052 ??         0:00.01 /Applications/TextWrangler.app/Contents/Helpers/Crash 
+ 1103 ??         0:06.45 /System/Library/CoreServices/Dock.app/Contents/Resourc
+ 3304 ??         0:00.05 /usr/bin/ssh-agent -l
+ 5922 ??        37:54.10 /Applications/Utilities/Activity Monitor.app/Contents/
+ 5923 ??        34:24.10 /Applications/Utilities/Activity Monitor.app/Contents/
+ 6278 ??         0:01.90 /Applications/TextEdit.app/Contents/MacOS/TextEdit -ps
+ 6823 ??         0:04.65 /Applications/Dictionary.app/Contents/MacOS/Dictionary
+ 7010 ??         2:41.33 /Applications/Utilities/Terminal.app/Contents/MacOS/Te
+ 9178 ??        67:02.15 /Applications/Audacity.app/Contents/MacOS/Audacity -ps
+11164 ??        22:18.89 /Applications/Google Chrome.app/Contents/MacOS/Google 
+11188 ??        29:00.34 /Applications/Google Chrome.app/Contents/Versions/15.0
+11195 ??        12:06.43 /Applications/Google Chrome.app/Contents/Versions/15.0
+11198 ??         0:41.81 /Applications/iChat.app/Contents/MacOS/iChat -psn_0_14
+11199 ??         0:00.96 /System/Library/Frameworks/InstantMessage.framework/iC
+11276 ??         0:06.71 /Applications/Google Chrome.app/Contents/Versions/15.0
+11279 ??         0:01.69 /Applications/Google Chrome.app/Contents/Versions/15.0
+11281 ??         0:46.54 /Applications/Google Chrome.app/Contents/Versions/15.0
+11282 ??         0:20.85 /Applications/Google Chrome.app/Contents/Versions/15.0
+11283 ??         0:01.29 /Library/Application Support/Google/GoogleTalkPlugin.a
+11289 ??         0:07.56 /Applications/Google Chrome.app/Contents/Versions/15.0
+11418 ??         1:08.07 /Applications/Google Chrome.app/Contents/Versions/15.0
+11536 ??         0:03.60 /Applications/Google Chrome.app/Contents/Versions/15.0
+11557 ??         0:13.29 /Applications/Google Chrome.app/Contents/Versions/15.0
+11583 ??         0:30.47 /Applications/Safari.app/Contents/MacOS/Safari -psn_0_
+11679 ??         0:00.05 /usr/sbin/ocspd
+ 7011 ttys000    0:03.85 login -pf root
+ 7013 ttys000    0:00.01 -sh
+ 7026 ttys000    0:00.03 man python
+ 7027 ttys000    0:00.00 sh -c (cd '/usr/share/man' && /usr/bin/tbl /usr/share/
+ 7028 ttys000    0:00.00 sh -c (cd '/usr/share/man' && /usr/bin/tbl /usr/share/
+ 7031 ttys000    0:00.00 sh -c (cd '/usr/share/man' && /usr/bin/tbl /usr/share/
+ 7032 ttys000    0:00.04 /usr/bin/less -is
+ 7036 ttys001    0:00.08 login -pf root
+ 7037 ttys001    0:00.04 -sh
+ 7060 ttys002    0:00.50 login -pf root
+ 7062 ttys002    0:00.06 -sh
+ 7217 ttys003    0:01.35 login -pf root
+ 7218 ttys003    0:00.29 -sh
+11710 ttys003    0:00.00 ps -U root
+ 7337 ttys004    0:01.36 login -pf root
+ 7338 ttys004    0:00.01 -sh
+11454 ttys005    0:02.76 login -pf root
+11455 ttys005    0:00.01 -sh
+11467 ttys005    0:00.07 ssh drowe2@my.cs.lmu.edu
+11588 ttys006    0:00.03 login -pf root
+11589 ttys006    0:00.01 -sh
+
+2. I'm already running as root (when I say `whoami`, it indeed responds with
+   `root`). So, I'll try with daemon.
+   
+   Command:
+   ps -U daemon
+   
+   Output:
+  PID TTY           TIME CMD
+   15 ??         0:05.34 /usr/sbin/distnoted
+
+3. The process with the greatest real memory usage is Google Chrome Helper
+   
+   Command:
+   ps -AmcO %mem
+   
+   Output:
+   
+  PID %MEM   TT  STAT      TIME COMMAND
+11188 16.4   ??  S     30:08.97 Google Chrome Helper
+11164  7.7   ??  Us    23:22.81 Google Chrome
+11195  5.7   ??  S     15:16.62 Google Chrome Helper EH
+   33  4.9   ??  Ss     7:53.71 mds
+11769  3.8   ??  Ss     0:05.44 Front Row
+11418  3.3   ??  S      1:09.08 Google Chrome Helper
+11281  3.3   ??  S      0:50.66 Google Chrome Helper
+   70  3.2   ??  Ss    35:10.86 WindowServer
+ 7010  2.9   ??  Ss     3:09.10 Terminal
+11733  1.9   ??  S      0:16.14 Google Chrome Helper
+11276  1.8   ??  S      0:07.35 Google Chrome Helper
+11536  1.7   ??  S      0:03.78 Google Chrome Helper
+11289  1.7   ??  S      0:07.94 Google Chrome Helper
+11557  1.7   ??  S      0:13.71 Google Chrome Helper
+11198  1.5   ??  Us     0:47.19 iChat
+11583  1.5   ??  Ss     0:30.94 Safari
+ 1051  1.5   ??  Ss    14:19.72 TextWrangler
+  158  1.3   ??  Ss     9:50.32 Finder
+ 9178  1.0   ??  Ss    68:24.28 Audacity
+ 6823  0.8   ??  Ss     0:04.69 Dictionary
+ 1103  0.6   ??  U      0:06.48 DashboardClient
+ 5922  0.6   ??  Ss    38:29.83 Activity Monitor
+11279  0.6   ??  S      0:02.01 Google Chrome Helper
+  149  0.5   ??  Ss     0:06.40 Spotlight
+   59  0.5   ??  Ss     0:32.04 coreservicesd
+11282  0.5   ??  S      0:25.84 Google Chrome Helper EH
+  157  0.5   ??  Ss     2:35.83 SystemUIServer
+ 6278  0.4   ??  Ss     0:01.92 TextEdit
+11283  0.4   ??  Ss     0:01.51 GoogleTalkPlugin
+  155  0.4   ??  Ss     0:21.44 ATSServer
+  153  0.4   ??  Ss     0:36.43 Dock
+   34  0.3   ??  Ss     0:03.27 loginwindow
+11199  0.3   ??  Ss     0:01.01 iChatAgent
+  168  0.2   ??  Ss     0:02.75 Microsoft AU Daemon
+  226  0.2   ??  Ss     0:02.56 AppleSpell
+  156  0.2   ??  Ss     0:07.05 coreaudiod
+  165  0.2   ??  Ss     0:20.87 HP Product Research
+   16  0.2   ??  Ss     9:28.45 mDNSResponder
+11166  0.1   ??  SNs    0:01.13 mdworker
+   11  0.1   ??  Ss     0:49.13 DirectoryService
+  145  0.1   ??  Ss     0:00.51 AirPort Base Station Agent
+   14  0.1   ??  Ss     0:42.43 configd
+  150  0.1   ??  Ss     0:01.07 UserEventAgent
+  162  0.1   ??  Ss     0:18.04 HPEventHandler
+   25  0.1   ??  Ss     0:15.37 httpd
+   75  0.1   ??  S      0:00.02 httpd
+   39  0.1   ??  Ss     0:47.54 fseventsd
+   52  0.1   ??  Ss     0:01.62 blued
+   20  0.1   ??  Ss     0:02.16 securityd
+ 3151  0.1   ??  S      0:00.02 httpd
+  469  0.1   ??  S      0:00.04 httpd
+  166  0.1   ??  Ss     0:00.46 iTunesHelper
+ 6222  0.1   ??  S      0:00.01 httpd
+ 5923  0.1   ??  Ss    35:00.06 pmTool
+11792  0.1   ??  Us     0:00.03 PubSubAgent
+ 3304  0.1   ??  Ss     0:00.05 ssh-agent
+11772  0.1   ??  Ss     0:00.02 BezelUIServer
+   10  0.1   ??  Ss     0:01.55 kextd
+ 7337  0.1 s004  Ss     0:01.36 login
+ 7060  0.1 s002  Ss     0:00.50 login
+ 7217  0.1 s003  Ss     0:01.35 login
+11454  0.1 s005  Ss     0:02.76 login
+   50  0.0   ??  Ss     0:07.15 socketfilterfw
+   94  0.0   ??  Ss     0:00.11 privoxy
+11467  0.0 s005  S+     0:00.07 ssh
+   44  0.0   ??  Ss     0:02.42 diskarbitrationd
+ 7218  0.0 s003  S      0:00.31 -sh
+ 7062  0.0 s002  S      0:00.10 -sh
+ 7338  0.0 s004  S+     0:00.02 -sh
+11455  0.0 s005  S      0:00.01 -sh
+   69  0.0   ??  S      0:00.10 krb5kdc
+   27  0.0   ??  Ss     0:20.66 usbmuxd
+   15  0.0   ??  Ss     0:05.38 distnoted
+   24  0.0   ??  Ss     0:27.56 ntpd
+11747  0.0 s003  S+     0:00.00 sh
+   36  0.0   ??  Ss     0:22.85 kdcmond
+    1  0.0   ??  Ss     0:04.98 launchd
+ 1052  0.0   ??  S      0:00.01 crash-catcher
+   96  0.0   ??  Ss     0:00.13 hpusbmond
+   41  0.0   ??  Ss     0:00.37 dynamic_pager
+11752  0.0 s003  S+     0:00.22 less
+   48  0.0   ??  Ss     0:00.07 autofsd
+   13  0.0   ??  Ss     4:48.66 syslogd
+11746  0.0 s003  S+     0:00.01 man
+   35  0.0   ??  Ss     0:00.01 KernelEventAgent
+11793  0.0 s002  R+     0:00.00 ps
+   26  0.0   ??  Ss     0:00.69 cron
+   29  0.0   ??  Ss     0:00.01 SystemStarter
+   12  0.0   ??  Ss     0:28.21 notifyd
+   38  0.0   ??  Ss     0:00.01 hidd
+11748  0.0 s003  S+     0:00.00 sh
+  152  0.0   ??  Ss     0:00.01 pboard
+11751  0.0 s003  S+     0:00.00 sh
+  136  0.0   ??  Ss     0:00.02 vmnet-bridge
+   28  0.0   ??  Ss     7:00.40 update
+  118  0.0   ??  Ss     0:00.53 vmnet-natd
+  124  0.0   ??  Ss     0:00.55 vmnet-dhcpd
+  134  0.0   ??  Ss     0:00.45 vmnet-dhcpd
+  129  0.0   ??  Ss     0:00.00 vmnet-netifup
+  126  0.0   ??  Ss     0:00.00 vmnet-netifup
+
+
+  The which takes up the most virtual memory is Google Chrome:
+  
+  Commands:
+  top
+  ps -c -p 12613 #to check which process was 12613, since its name is cut off
+  
+  PID COMMAND      %CPU   TIME   #TH #PRTS #MREGS RPRVT  RSHRD  RSIZE  VSIZE
+12685 top          7.5%  0:00.78   1    18     29  520K   200K  1112K    18M 
+12645 sh           0.0%  0:00.13   1    14     19  296K   688K   960K    18M 
+12644 login        0.0%  0:00.36   1    17     55  308K   268K  1084K    19M 
+12642 Google Chr   0.0%  0:01.34   5    98    231   14M    46M    33M   483M 
+12636 Google Chr   0.0%  0:01.92   5    97    228   16M    44M    36M   445M 
+12619 ocspd        0.0%  0:00.06   1    34     22  444K   192K  1112K    18M 
+12613 Google Chr   0.0%  0:11.49  26   233    345   86M    48M   111M   674M 
+12596 mdworker     0.0%  0:00.35   4    55     38  776K  5824K  3084K    34M 
+11772 BezelUISer   0.0%  0:00.03   1    33     27  240K  4752K  1184K   278M 
+11752 less         0.0%  0:00.22   1    13     20  204K   184K   516K    18M 
+11751 sh           0.0%  0:00.00   1     8     20   48K   852K   332K    18M 
+11748 sh           0.0%  0:00.00   1     8     20   48K   852K   360K    18M 
+11747 sh           0.0%  0:00.00   1    13     20   68K   824K   664K    18M 
+11746 man          0.0%  0:00.00   1    13     20  200K   184K   480K    18M 
+11583 Safari       0.0%  0:38.80   9   142    915   12M    20M    32M   424M 
+11455 sh           0.0%  0:00.01   1    14     20  284K   688K   928K    18M
+
+  PID TTY           TIME CMD
+12613 ??         0:11.36 Google Chrome
+
+4. The other users are root, daemon, statd, syslog, messagebus, ntp, masao,
+   mmoualle, www-data, jdahilig, ejaso, and tnichol4.
+   
+   Command:
+   ps -eo ruser
+   
+   Output:
+RUSER 
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+daemon
+statd
+root
+syslog
+messagebus
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+ntp
+root
+root
+root
+masao
+masao
+root
+root
+root
+root
+root
+mmoualle
+mmoualle
+root
+root
+masao
+masao
+root
+www-data
+root
+root
+jdahilig
+jdahilig
+root
+root
+www-data
+ejaso
+ejaso
+ejaso
+ejaso
+ejaso
+ejaso
+ejaso
+www-data
+www-data
+root
+drowe2
+drowe2
+drowe2
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+masao
+masao
+dhara
+root
+masao
+masao
+root
+www-data
+www-data
+www-data
+tnichol4
+tnichol4
+www-data
+www-data
+www-data
+root
+masao
+masao
+
+
+##I/O and File "Gymnastics"
+1. (Tunneling)
+
+2. Before:
+screen
+drowe2@nfsweb101:~$ python forever.py 
+0
+1
+2
+3
+4
+5
+#Ctrl-A Ctrl-D
+exit #from ssh
+
+   After:
+#log back in
+screen -R
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+
+3. The largest subfolder is my home `.` itself, which is using 994764 KB. The
+   largest *proper* subfolder, however, is `.cache` using 514280 KB.
+      
+du --max-depth=1
+16976	./theology
+514280	./.cache
+16	./.gegl-0.0
+12	./.mission-control
+1396	./B2Logic
+704	./.gconf
+476	./.gimp-2.6
+48	./.subversion
+10912	./.npm
+4	./.gnome2_private
+4	./.nautilus
+184	./cmsi284-old
+8	./workspace
+20900	./public_html
+4516	./Downloads
+25928	./.m2
+1180	./cmsi284
+80	./prime
+4	./.gvfs
+68	./cmsi370_old
+8260	./.config
+3472	./.pulse
+108	./.gnome2
+45396	./.local
+4300	./.eclipse
+260	./.thumbnails
+72	./.gconfd
+67000	./.mozilla
+1852	./.openoffice.org
+340	./.gstreamer-0.10
+288	./.macromedia
+48	./svn_html
+28	./Documents
+9364	./node_modules
+712	./.adobe
+188316	./git-repos
+18852	./cmsi370
+4	./Videos
+4	./Ubuntu One
+132	./.dbus
+936	./cmsi282
+36	./.pki
+4	./Public
+536	./cmsi386
+34500	./node-v0.4.12
+120	./Pictures
+156	./blah
+68	./.evolution
+8	./.fontconfig
+104	./Desktop
+4	./Templates
+11296	./tomcat
+184	./sandbox
+4	./Music
+32	./.ssh
+994764	.
+
+   Filter out:
+
+du --max-depth=1 | grep "./Public"
+4	./Public
+
+5. Mount points:
+
+mount
+
+/dev/disk0s2 on / (hfs, local, journaled)
+devfs on /dev (devfs, local)
+fdesc on /dev (fdesc, union)
+map -hosts on /net (autofs, automounted)
+map auto_home on /home (autofs, automounted)
+/dev/disk1s2 on /Volumes/Brood War CD (hfs, local, nodev, nosuid, read-only, noowners)
+
+
