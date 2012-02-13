@@ -4,6 +4,8 @@
 ##Process Survey
 1. There are very many processes running as root, likely because I normally
    work as root on my MacBook.
+
+> JD: Wow --- even for an experienced user these days this is risky.  Don't you want to at least be a sudoer?
    
    Command:
    ps -U root
@@ -259,6 +261,8 @@
    
    Command:
    ps -eo ruser
+
+> JD: A little more piping into some choice commands (look up `sort` and `uniq`) would eliminate pretty much all of the manual labor involved in this question.
    
    Output:
 RUSER 
@@ -512,6 +516,8 @@ du --max-depth=1
 du --max-depth=1 | grep "./Public"
 4	./Public
 
+> JD: Missing exercise --- tracking a file's inode number.
+
 5. Mount points:
 
 mount
@@ -523,4 +529,4 @@ map -hosts on /net (autofs, automounted)
 map auto_home on /home (autofs, automounted)
 /dev/disk1s2 on /Volumes/Brood War CD (hfs, local, nodev, nosuid, read-only, noowners)
 
-
+> JD: LOL did you pop that Brood War CD in just to see if I'd notice?  :)  (I did)
