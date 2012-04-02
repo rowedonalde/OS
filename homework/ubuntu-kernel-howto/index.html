@@ -35,6 +35,7 @@
         <li><span class="bash">make</span></li>
         <li><span class="bash">gcc</span></li>
         <li><span class="bash">dkpg</span></li>
+        <li><span class="bash">gedit</span></li>
       </ol>
     </li>
     <li>The <span class="bash">fakeroot</span> package</li>
@@ -135,5 +136,89 @@
     RAM allotted.
     <img src="http://sywh.freeforums.org/images/smilies/icon_cry.gif" />
   </p>
+  
+  <h2>Step 3: Install the newly built packages</h2>
+  <p>
+    Once the kernel has finished building, <span class="bash">cd</span> up to
+    the directory above the root of the
+    <span class="bash">ubuntu-oneiric</span> repo (that is,
+    <span class="bash">~/git-repos</span> if you've been following along). You
+    should be able to see the build product: 2 .deb files, one beginning with
+    <span class="bash">linux-headers</span> and the other beginning with
+    <span class="bash">linux-image</span>. As a derivative of the Debian
+    distribution of
+    <a href="http://www.youtube.com/watch?&v=kZlOCHYu1Vk#t=170s">Linux</a>,
+    Ubuntu uses the <a href="http://en.wikipedia.org/wiki/Dpkg">Debian package
+    management system</a> to handle distribution and installation of software
+    packages, in this case the image and headers of your newly built Linux
+    kernel. To install the kernel, use the following command:
+  </p>
+  
+  <pre>
+    sudo dpkg -i *.deb
+  </pre>
+  
+  <p>
+    Once the kernel packages finish installing successfully, move them
+    somewhere for safe keeping&mdash;you'll want them out of the way when you
+    build and install future kernels.
+  </p>
+  
+  <h2>Step 4: Configure GRUB</h2>
+  <p>
+    Ubuntu uses <a href="https://help.ubuntu.com/community/Grub2">GRUB 2</a>
+    to boot the kernel and load the operating system. As a system can have any
+    number of kernels from which it can choose to load (yours now has at least
+    two!), GRUB 2 must be configured to load the newly compiled kernel. First,
+    though, check the version of GRUB that you have with the following command:
+  </p>
+  
+  <pre>
+    grub-install -v
+  </pre>
+  
+  <p>
+    The program should respond with something like:
+  </p>
+  
+  <pre>
+    grub-install (GRUB) 1.99-12ubuntu5
+  </pre>
+  
+  <p>
+    As long as yours is at least 1.98, you're in good shape; otherwise, get
+    yourself a new version, as the following instructions won't make any sense!
+    (Yes, GRUB 2 technically started at GRUB 1.98. The biggest critical
+    difference from a user standpoint is the configuration process.) First,
+    open the GRUB 2 configuration file in Gedit 
+    (<a href="http://xkcd.com/378/">or whatever, it's up to you</a>)
+    with the following command:
+  </p>
+  
+  <pre>
+    sudo gedit /etc/default/grub
+  </pre>
+  
+  <p>
+    On line 7 or thereabouts, you should find an uncommented (that is, the one
+    without a # character in front of it) option that says
+    <span class="bash">GRUB_DEFAULT</span>. Assuming you appended the string
+    <span class="bash">-test</span> when you build the kernel, change that
+    option to:
+  </p>
+  
+  <pre>
+    GRUB_DEFAULT="Ubuntu, with Linux 3.0.22-rowehelloworld2+"
+  </pre>
+  
+  <p>
+    Once you've brought that in, save and quit Gedit. To make the new
+    configuration official, call the following command:
+  </p>
+  
+  <pre>
+    sudo update-grub
+  </pre>
+
 </body>
 </html>
