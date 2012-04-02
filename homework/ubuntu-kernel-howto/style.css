@@ -1,0 +1,15 @@
+/**
+ * /ubuntu-kernel-howto/style.css
+ *
+ * Stylesheet for the instructions on modifying and building the Ubuntu kernel
+ */
+
+body
+{
+  max-width: 50em;
+}
+ 
+.bash
+{
+  font-family: monospace;
+}
