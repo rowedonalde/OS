@@ -3,13 +3,56 @@
  *
  * Stylesheet for the instructions on modifying and building the Ubuntu kernel
  */
-
-body
+ 
+html
 {
-  max-width: 50em;
+  background-color: #333333;
+  background-image: url('tux.png');
+  background-position: right top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
  
-.bash
+body
+{
+  background-color: #EEEEEE;
+  max-width: 50em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  padding: 1em;
+  border-radius: 1em;
+  font-family: sans-serif;
+}
+
+p
+{
+  text-align: justify;
+}
+
+acronym
+{
+  color: 3F9E62;
+}
+
+li
+{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.sortable li
+{
+  border-style: solid;
+  border-color: #333333;
+  border-radius: 1em;
+  
+  padding: .5em;
+  
+  list-style-type: none;
+} 
+.bash, pre
 {
   font-family: monospace;
+  color: rgb(0,128,0);
 }

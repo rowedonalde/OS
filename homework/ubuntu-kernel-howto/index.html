@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- 
-  ubuntu-kernel-howto/index.html
+  /ubuntu-kernel-howto/index.html
   
   Webpage documenting how to first build and install a new Linux kernel for 
   Ubuntu and then how to add a new system call and repeat.
@@ -9,11 +9,131 @@
 <html>
 <head>
   <title>
-    Modifying, Building, and Installing a new Kernel for Ubuntu 11.10
+    The Modern Lady or Gentleman's Guide to Modifying, Building, and Installing
+    a new Kernel for Ubuntu 11.10
   </title>
+  
+  <link rel="stylesheet" href="style.css">
   
 <head>
 <body>
+  <h1>
+    The Modern Lady or Gentleman's Guide to Modifying, Building, and Installing
+    a new Kernel for Ubuntu 11.10
+  </h1>
   
+  <h2>
+    Prerequisites
+  </h2>
+  <ol>
+    <li>Computer or virtual machine running Ubuntu 11.10 (Oneiric Ocelot)</li>
+    <li>
+      The following should be a part of the Ubuntu 11.10 distribution, but you
+      should check to make sure that they are present:
+      <ol>
+        <li><span class="bash">git</span></li>
+        <li><span class="bash">make</span></li>
+        <li><span class="bash">gcc</span></li>
+        <li><span class="bash">dkpg</span></li>
+      </ol>
+    </li>
+    <li>The <span class="bash">fakeroot</span> package</li>
+    <li>The <span class="bash">kernel-package</span> package</li>
+    <li>The <span class="bash">libncurses5-dev</span> package</li>
+    <li>root privileges</li>
+    <li>An Internet connection (Still gotta say it...)</li>
+  </ol>
+  
+  <h2>Step 1: Download the kernel sources</h2>
+  <p>
+    Ubuntu maintains the sources to their versions of the Linux kernel at
+    ubuntu.kernel.org. Move into a desired directory (I use 
+    <span class="bash">~/git-repos</span>, where <span class="bash">~</span> is
+    my home directory) and clone in the most recent version of the kernel with
+    the following command:
+  </p>
+  
+  <pre>
+    git clone git://kernel.ubuntu.com/ubuntu/ubuntu-oneiric.git
+  </pre>
+  
+  <p>
+    This should generate a new directory called
+    <span class="bash">ubuntu-oneiric</span>
+    containing all of the sources for the kernel. Sit tight, since the
+    kernel comprises a considerably large volume of code and will take an
+    accordingly decent length of time to download.
+  </p>
+  
+  <h2>Step 2: Configure and build the plain kernel</h2>
+  <p>
+    To get a feel for how to build a new kernel from source before you
+    complicate things with your modification, you should first practice
+    building the one you cloned. As with building most projects from source,
+    there are three parts to this process: configuring, cleaning, and building.
+    All three of these parts are done from the root directory of the project
+    (in my case, <span class="bash">~/git-repos/ubuntu-oneiric</span>).
+  </p>
+  
+  <p>
+    To configure the build with the graphic prompt, use the following command:
+  </p>
+  
+  <pre>
+    make menuconfig
+  </pre>
+  
+  <p>
+    Unless you have some reason to make adjustments to the default settings (I
+    didn't, and you probably shouldn't either), just select "Exit." Once the
+    build finishes configuring, clean up the tree with the following:
+  </p>
+  
+  <pre>
+    make-kpkg clean
+  </pre>
+  
+  <p>
+    Since you presumably haven't compiled anything yet, there shouldn't be
+    much, if anything, to clean. Regardless, it's a pretty quick process. Once
+    that's done, it's time to build! To do so, use the following:
+  </p>
+  
+  <pre>
+    fakeroot make-kpkg --initrd --append-to-version=-test kernel_image kernel_headers
+  </pre>
+  
+  <p>
+    So far, the commands you've given to the terminal have been pretty simple.
+    This one, though, is considerably more complicated, so let's break it down
+    for everybody's edification and general well-being. As with the previous
+    command to clean the build tree, this command, is a part of the
+    <span class="bash">make-kpkg</span> utility which, per its manpage,
+    "is used to create the kernel related Debian packages." The command before
+    <span class="bash">make-kpkg</span>, <span class="bash">fakeroot</span>, is
+    similar to <span class="bash">sudo</span> in that it grants what appears to
+    be root privileges for a process. Unlike <span class="bash">sudo</span>,
+    though, this command only offers a subset of commands that appear to act
+    as root and are
+    <a href="http://unix.stackexchange.com/questions/9714/what-is-the-need-for-fakeroot-command-in-linux">
+    helpful for when such commands are necessary but the user may not
+    necessarily have root permissions</a>. The option 
+    <span class="bash">--initrd</span> specifies to create an 
+    <a href="http://en.wikipedia.org/wiki/Initrd">initial ramdisk</a>,
+    necessary for booting the system with a given kernel. The option
+    <span class="bash">--append-to-version</span> allows you to append a string
+    to the end of the version name of your kernel. Even though this version of
+    the kernel source is likely different from that of the kernel that came
+    with your distribution of Ubuntu, it's a wise idea to attach a name to
+    identify this build&mdash;especially since you'll be building a modified
+    version later! The last two pieces of the command,
+    <span class="bash">kernel_image</span> and
+    <span class="bash">kernel_headers</span>, specify that a Debian packages of
+    the kernel binary and its C headers should be created. Once you've called
+    this command in the terminal, sit back&mdash;it will take awhile,
+    especially if you're like me and you're running it in a VM with 512MB of
+    RAM allotted.
+    <img src="http://sywh.freeforums.org/images/smilies/icon_cry.gif" />
+  </p>
 </body>
 </html>
