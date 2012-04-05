@@ -219,6 +219,32 @@
   <pre>
     sudo update-grub
   </pre>
+  
+  <h2>Step 5: Restart your machine</h2>
+  <p>Just do this ^</p>
+  
+  <h2>Step 6: Check your kernel version</h2>
+  
+  <p>
+    Once your machine is back on and you're logged back in, check the version
+    of the kernel to make sure that the install went through okay and that the
+    new kernel is actually booted:
+  </p>
+  
+  <pre>
+    uname -smr
+  </pre>
+  
+  <p>
+    The terminal should respond with <span class="bash">3.0.22-test+</span> (or
+    whatever you chose for the <span class="bash">--append-to-version</span> if
+    you didn't choose <span class="bash">test</span>). If the command responds
+    with the name of the kernel you just built, congratulations! You have
+    successfully built and deployed a new Linux kernel from scratch. If not,
+    well, go check over your output history&mdash;as long as everything
+    appeared to go well with building, perhaps there's a confusion with GRUB.
+    (You <em>did</em> run <span class="bash">grub-update</span>, didn't you?)
+  </p>
 
 </body>
 </html>
