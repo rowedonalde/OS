@@ -1,0 +1,130 @@
+From 434d1a8f69744dd7b9d7f489d9599fe0c3e8d44a Mon Sep 17 00:00:00 2001
+From: Don Rowe <rowedonalde@gmail.com>
+Date: Mon, 19 Mar 2012 04:16:52 -0700
+Subject: [PATCH 1/5] Added the source file for the new system call.
+
+---
+ kernel/helloworld.c |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+ create mode 100644 kernel/helloworld.c
+
+diff --git a/kernel/helloworld.c b/kernel/helloworld.c
+new file mode 100644
+index 0000000..8889b6c
+--- /dev/null
++++ b/kernel/helloworld.c
+@@ -0,0 +1,8 @@
++#include <linux/linkage.h>
++#include <linux/kernel.h>
++asmlinkage int sys_helloworld()
++{
++    printk(KERN_EMERG "hello world!");
++    
++    return 1;
++}
+-- 
+1.7.5.4
+
+
+From 7acf4222e0f3378e328e6a2fec4c0584a6a0d770 Mon Sep 17 00:00:00 2001
+From: Don Rowe <rowedonalde@gmail.com>
+Date: Mon, 19 Mar 2012 04:18:18 -0700
+Subject: [PATCH 2/5] Added the new system call to the list.
+
+---
+ arch/x86/kernel/syscall_table_32.S |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/arch/x86/kernel/syscall_table_32.S b/arch/x86/kernel/syscall_table_32.S
+index fbb0a04..24c8896 100644
+--- a/arch/x86/kernel/syscall_table_32.S
++++ b/arch/x86/kernel/syscall_table_32.S
+@@ -346,3 +346,4 @@ ENTRY(sys_call_table)
+ 	.long sys_syncfs
+ 	.long sys_sendmmsg		/* 345 */
+ 	.long sys_setns
++	.long sys_helloworld
+-- 
+1.7.5.4
+
+
+From 35c05a746e0b80150ec1eb14fdf2f25ea92868c2 Mon Sep 17 00:00:00 2001
+From: Don Rowe <rowedonalde@gmail.com>
+Date: Mon, 19 Mar 2012 04:19:49 -0700
+Subject: [PATCH 3/5] Added the new sytem call to the system call table.
+
+---
+ arch/x86/include/asm/unistd_32.h |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/arch/x86/include/asm/unistd_32.h b/arch/x86/include/asm/unistd_32.h
+index 593485b..cfdf98d 100644
+--- a/arch/x86/include/asm/unistd_32.h
++++ b/arch/x86/include/asm/unistd_32.h
+@@ -352,10 +352,11 @@
+ #define __NR_syncfs             344
+ #define __NR_sendmmsg		345
+ #define __NR_setns		346
++#define __NR_helloworld         347
+ 
+ #ifdef __KERNEL__
+ 
+-#define NR_syscalls 347
++#define NR_syscalls 348
+ 
+ #define __ARCH_WANT_IPC_PARSE_VERSION
+ #define __ARCH_WANT_OLD_READDIR
+-- 
+1.7.5.4
+
+
+From 4a6b35e92ba131221c9b514db484f181ab3a5a63 Mon Sep 17 00:00:00 2001
+From: Don Rowe <rowedonalde@gmail.com>
+Date: Mon, 19 Mar 2012 04:23:09 -0700
+Subject: [PATCH 4/5] Added the Linux syscall interface for the new system
+ call.
+
+---
+ include/linux/syscalls.h |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/include/linux/syscalls.h b/include/linux/syscalls.h
+index 8c03b98..8f058f7 100644
+--- a/include/linux/syscalls.h
++++ b/include/linux/syscalls.h
+@@ -847,4 +847,5 @@ asmlinkage long sys_open_by_handle_at(int mountdirfd,
+ 				      struct file_handle __user *handle,
+ 				      int flags);
+ asmlinkage long sys_setns(int fd, int nstype);
++asmlinkage long sys_helloworld(void);
+ #endif
+-- 
+1.7.5.4
+
+
+From f6e5f339f07b04aa4e0de08c8f9fd599b174e341 Mon Sep 17 00:00:00 2001
+From: Don Rowe <rowedonalde@gmail.com>
+Date: Mon, 19 Mar 2012 04:24:38 -0700
+Subject: [PATCH 5/5] Added the new system call source reference to
+ kernel/Makefile
+
+---
+ kernel/Makefile |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/kernel/Makefile b/kernel/Makefile
+index fbedfd4..55b8e6f 100644
+--- a/kernel/Makefile
++++ b/kernel/Makefile
+@@ -10,7 +10,7 @@ obj-y     = sched.o fork.o exec_domain.o panic.o printk.o \
+ 	    kthread.o wait.o kfifo.o sys_ni.o posix-cpu-timers.o mutex.o \
+ 	    hrtimer.o rwsem.o nsproxy.o srcu.o semaphore.o \
+ 	    notifier.o ksysfs.o pm_qos_params.o sched_clock.o cred.o \
+-	    async.o range.o jump_label.o
++	    async.o range.o jump_label.o helloworld.o
+ obj-y += groups.o
+ 
+ ifdef CONFIG_FUNCTION_TRACER
+-- 
+1.7.5.4
+
