@@ -56,3 +56,7 @@ li
   font-family: monospace;
   color: rgb(0,128,0);
 }
+a
+{
+  color: rgb(0, 128, 128); /*easier on the eyes*/
+}
