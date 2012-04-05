@@ -294,18 +294,18 @@
   
   <p>
     What we have is a pretty short chunk of C code&mdash;it <em>is</em> a Hello
-    World, after all. As it's the ever-laconic, C, though, each piece packs
+    World, after all. As it's the ever-laconic C, though, each piece packs
     quite a punch. First, we see two header includes,
-    <span class="bash">#include &lt;linux/linkage.h&lt;</span> and
-    <span class="bash">#include &lt;linux/kernel.h&lt;</span>, which,
+    <span class="bash">#include &lt;linux/linkage.h&gt;</span> and
+    <span class="bash">#include &lt;linux/kernel.h&gt;</span>, which,
     respectively, specify the <span class="bash">asmlinkage</span>
     preprocessor macro and <span class="bash">printk()</span> prototype per
     <a href="http://lxr.free-electrons.com/source/include/linux/linkage.h?v=3.0">Linux
     Cross-Reference</a>. The <span class="bash">asmlinkage</span> macro
     specifes that the following kernel function is to be read as pure C, not
-    C++. The <span class="bash">printk</span> specifies a class of functions
-    that write to kernel logs, and the <span class="bash">KERN_EMERG</span>
-    macro specifies that <span class="bash">printk</span> should print the
+    C++. The <span class="bash">printk()</span> calls a function
+    that writes to kernel logs, and the <span class="bash">KERN_EMERG</span>
+    macro specifies that <span class="bash">printk()</span> should print the
     message as a signal of complete system failure (though, if you lean toward
     the less dramatic, there is a whole list from which you can choose
     <a href="http://lxr.free-electrons.com/source/include/linux/printk.h?v=3.0">listed
