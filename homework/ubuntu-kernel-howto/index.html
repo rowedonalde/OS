@@ -314,7 +314,72 @@
     written up, let's hook it into the kernel.
   </p>
   
+  <h2>
+    Step 8: Add your system call to the system call table and register its
+    syscall number
+  </h2>
   
+  <p>
+    System calls are incredibly low-level constructs, so they must be
+    <a href="http://www.win.tue.nl/~aeb/linux/lk/lk-4.html">accessed by number,
+    not directly by their more-or-less-human-readable names</a>. Furthermore,
+    they are numbered based on their order in the system call table, found in
+    <span class="bash">arch/x86/kernel/syscall_table_32.S</span>. (The
+    <span class="bash">x86</span> may be different depending on your
+    processor.) To add your
+    system call to the table, open up that file a text editor and move all the
+    way to the bottom. On a new last line, add the following:
+  </p>
+  
+  <pre>
+    .long sys_helloworld
+  </pre>
+  
+  <p>
+    Note the number of your system call&mdash;in my case, it was 347, but the
+    syscall table should be commented every few lines with a marker, the last
+    of which you can use to determine your system call's number.
+  </p>
+  
+  <p>
+    Next, you need to register your system call number as a macro and update
+    the total number of system calls. Assuming that you're still running a
+    32-bit system, open the file
+    <span class="bash">arch/x86/include/asm/unistd_32.h</span> in a text
+    editor. After the opening comment, you should see a big long list of macro
+    definitions starting with <span class="bash">__NR</span>, each of which
+    indicates a system call number. After the last of these definitions, that
+    is, before the line that says <span class="bash">#ifdef __KERNEL__</span>,
+    add the following line:
+  </p>
+  
+  <pre>
+    #define __NR_helloworld         347
+  </pre>
+  
+  <p>
+    System call numbers and the number of system calls that exist fluctuates;
+    your system call should be one more than the last one above it, so it may
+    be different than mine.
+  </p>
+  
+  <p>
+    Next, you need to update the number of system calls by simply incrementing
+    <span class="bash">#define NR_syscalls</span>. That is, if it currently
+    says
+  </p>
+  
+  <pre>
+    #define NR_syscalls 347
+  </pre>
+  
+  <p>
+    you should change it to
+  </p>
+  
+  <pre>
+    #define NR_syscalls 348
+  </pre>
 
 </body>
 </html>
