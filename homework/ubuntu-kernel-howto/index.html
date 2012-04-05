@@ -232,7 +232,7 @@
   </p>
   
   <pre>
-    uname -smr
+    uname -r
   </pre>
   
   <p>
@@ -245,6 +245,76 @@
     appeared to go well with building, perhaps there's a confusion with GRUB.
     (You <em>did</em> run <span class="bash">grub-update</span>, didn't you?)
   </p>
+  
+  <p>
+    Once you've fixed any heartbreaking disasters, it's time for the big
+    leagues&mdash;modifying the kernel with a custom system call.
+    <img src="http://sywh.freeforums.org/images/smilies/icon_e_biggrin.gif" />
+  </p>
+  
+  <h2>Step 7: Add the source file for the new system call</h2>
+  
+  <p>
+    First, a little note:
+    <a href="http://enzam.wordpress.com/2011/03/26/how-to-add-a-system-call-in-linux-kernel-ubuntu-os/">A
+    lot of people like to specify the new system call in the headers first.</a>
+    I, on the other hand, like to get my hands dirty with the actual coding.
+    <a href="http://en.wikipedia.org/wiki/Endianness#Etymology">To each their
+    own, I suppose.</a>
+  </p>
+  
+  <p>
+    If you have any business at all even peeking into the Linux kernel, much
+    less building it at home for fun and/or profit, chances are you're a huge
+    big-shot computer programmer guy by this point. Well, Mr. Big-shot, put
+    your nostalgia shoes on, since we're taking a ride back to Hello World!
+    town&mdash;for your first kernel mod, you'll be writing a system call that
+    writes <span class="bash">hello World!</span> to the kernel log file
+    <span class="bash">/var/log/kern.log</span>.
+    <a href="http://www.ibm.com/developerworks/linux/library/l-kernel-logging-apis/index.html">Fun
+    fact: the library you will be using to write to the kernel log is used not
+    just in Linux, but across many different types of kernels, *nix and
+    otherwise.</a> To add the code for the new call,
+    <span class="bash">cd</span> back to your
+    <span class="bash">ubuntu-oneiric</span> directory and open up a new file,
+    <span class="bash">kernel/helloworld.c</span>. To that new file, add the
+    following code:
+  </p>
+  
+  <pre>
+    #include <linux/linkage.h>
+    #include <linux/kernel.h>
+    asmlinkage int sys_helloworld()
+    {
+        printk(KERN_EMERG "hello world!");
+        
+        return 1;
+    }
+  </pre>
+  
+  <p>
+    What we have is a pretty short chunk of C code&mdash;it <em>is</em> a Hello
+    World, after all. As it's the ever-laconic, C, though, each piece packs
+    quite a punch. First, we see two header includes,
+    <span class="bash">#include &lt;linux/linkage.h&lt;</span> and
+    <span class="bash">#include &lt;linux/kernel.h&lt;</span>, which,
+    respectively, specify the <span class="bash">asmlinkage</span>
+    preprocessor macro and <span class="bash">printk()</span> prototype per
+    <a href="http://lxr.free-electrons.com/source/include/linux/linkage.h?v=3.0">Linux
+    Cross-Reference</a>. The <span class="bash">asmlinkage</span> macro
+    specifes that the following kernel function is to be read as pure C, not
+    C++. The <span class="bash">printk</span> specifies a class of functions
+    that write to kernel logs, and the <span class="bash">KERN_EMERG</span>
+    macro specifies that <span class="bash">printk</span> should print the
+    message as a signal of complete system failure (though, if you lean toward
+    the less dramatic, there is a whole list from which you can choose
+    <a href="http://lxr.free-electrons.com/source/include/linux/printk.h?v=3.0">listed
+    here</a>). <span class="bash">sys_helloworld()</span> is, of course, the
+    name of your system call function. Now that you've got your source code
+    written up, let's hook it into the kernel.
+  </p>
+  
+  
 
 </body>
 </html>
