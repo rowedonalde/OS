@@ -406,6 +406,43 @@
     <a href="https://www.securecoding.cert.org/confluence/display/seccode/DCL20-C.+Always+specify+void+even+if+a+function+accepts+no+arguments">it's
     best practice to specify a void "parameter" in your protoype</a>.
   </p>
+  
+  <h2>Step 10: Add your system call source file to the Makefile</h2>
+  
+  <p>
+    I bet you're champing at the bit to build this kernel for real at this
+    point&mdash;well, hold your horses, since there's one more step, and it
+    brings us full circle around the kernel mod racetrack (sorry if that last
+    one was a bit of a stretch). As with any project built with
+    <span class="bash">make</span>, you need to register your new files in the
+    relevant Makefile. Once again, take your trusty text editor and open up the
+    Makefile in the same directory as the added source file, in this case,
+    <span class="bash">kernel/Makefile</span>. (As you're probably aware,
+    files don't <em>need</em> comma-delimited extensions in Linux; also, be
+    sure to mind the capital <em>M</em>>.) Beneath the opening comment, you
+    should see a <span class="bash">make</span> instruction with the name
+    <span class="bash">obj-y</span>. At the end of that instruction, add the
+    name of the eventual object file generated from your system call source
+    file, that is, <span class="bash">helloworld.o</span>. So, the whole
+    definition should look close to the following, depending on the other
+    source files that may or may not be in that directory:
+  </p>
+  
+  <pre>
+    obj-y     = sched.o fork.o exec_domain.o panic.o printk.o \
+                cpu.o exit.o itimer.o time.o softirq.o resource.o \
+                sysctl.o sysctl_binary.o capability.o ptrace.o timer.o user.o \
+                signal.o sys.o kmod.o workqueue.o pid.o \
+                rcupdate.o extable.o params.o posix-timers.o \
+                kthread.o wait.o kfifo.o sys_ni.o posix-cpu-timers.o mutex.o \
+                hrtimer.o rwsem.o nsproxy.o srcu.o semaphore.o \
+                notifier.o ksysfs.o pm_qos_params.o sched_clock.o cred.o \
+                async.o range.o jump_label.o helloworld.o
+  </pre>
+  
+  <p>
+    Once that file is added to the list, it's time for the real deal.
+  </p>
 
 </body>
 </html>
