@@ -22,6 +22,8 @@
     a new Kernel for Ubuntu 11.10
   </h1>
   
+  <h3>Don Rowe, Loyola Marymount University</h3>
+  
   <h2>
     Prerequisites
   </h2>
@@ -500,6 +502,46 @@
   </pre>
   
   <h2>Step 13: Run your system call and verify that it works</h2>
+  
+  <p>
+    Unlike most terminal programs which you can use via standard input and
+    output, your new system call writes a message directly to the kernel log at
+    <span class="bash">/var/log/kern.log</span>. To keep track of additions to
+    this log as they happen, use <span class="bash">tail</span>'s "follow"
+    option like so:
+  </p>
+  
+  <pre>
+    tail -f /var/log/kern.log
+  </pre>
+  
+  <p>
+    You should see the 10 most recent lines in the log file. Since
+    <span class="bash">tail</span> keeps a hold of the terminal to wait for
+    changes to the file when following, open a new terminal window and
+    <span class="bash">cd</span> back to where you compiled
+    <span class="bash">sys_hello_caller</span>. Now the moment of
+    truth&mdash;call the following command to run your program and execute your
+    system call:
+  </p>
+  
+  <pre>
+    ./sys_hello_caller
+  </pre>
+  
+  <p>
+    To check to see that the system call, look back at the terminal window from
+    which you called <span class="bash">tail</span>. If you can see a message
+    that says the following (given the appropriate timestamp, of course),
+  </p>
+  
+  <pre>
+    Apr  5 12:27:55 ubuntu kernel: [45521.192751] hello world!
+  </pre>
+  
+  <p style="text-align:center;">
+    <img src="http://www.messletters.info/comments/congratulations/misc36.gif" />
+  </p>
 
 </body>
 </html>
