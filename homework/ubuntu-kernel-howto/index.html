@@ -380,6 +380,32 @@
   <pre>
     #define NR_syscalls 348
   </pre>
+  
+  <h2>
+    Step 9: Add your system call to the syscall interface header
+  </h2>
+  
+  <p>
+    In order to share functions across different C programs,
+    <a href="http://gcc.gnu.org/onlinedocs/cpp/Header-Files.html">they need to
+    be declared in header files</a>. Functions that represent system calls
+    in particular need to be declared as an interface that user mode programs
+    can access them through. In your repo, use a text editor to open the file
+    <span class="bash">include/linux/syscalls.h</span>. Scroll down to the
+    bottom of the file. Right above the <span class="bash">#endif</span>
+    statement at the end of the file, add the following:
+  </p>
+  
+  <pre>
+    asmlinkage long sys_helloworld(void);
+  </pre>
+  
+  <p>
+    Note that the function prototype is specified as taking a void parameter.
+    Even if your function takes no arguments,
+    <a href="https://www.securecoding.cert.org/confluence/display/seccode/DCL20-C.+Always+specify+void+even+if+a+function+accepts+no+arguments">it's
+    best practice to specify a void "parameter" in your protoype</a>.
+  </p>
 
 </body>
 </html>
