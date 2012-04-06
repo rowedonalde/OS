@@ -455,6 +455,51 @@
     <span class="bash">-helloworld</span> to differentiate this build from the
     previous one. See you on the other side...
   </p>
+  
+  <h2>Step 12: Write and compile a program to demonstrate your system call</h2>
+  
+  <p>
+    If you've reached this point, it means you've successfully built and
+    installed your kernel, and that you've verified that the new kernel is
+    actually running your machine right now. Now that that's the case, it's
+    time to see what your new system call can do (spoiler: not a whole lot, but
+    it gets the point across). To execute your system call, call the C function
+    <span class="bash">syscall(syscallnumber)</span> where
+    <span class="bash">syscallnumber</span> is your system call's number. Thus,
+    your program should look like the following:
+  </p>
+  
+  <pre>
+    /**
+     * sys_hello_caller.c
+     *
+     * This program demonstrates the use of the helloworld system call in the
+     * 3.0.22-helloworld+ kernel fork.
+     */
+
+    #define __NR_helloworld 347
+
+    //Invoke the newly defined helloworld system call which prints "hello, world!"
+    //to the kernel log file /var/log/kern.log:
+    
+    main()
+    {
+        syscall(__NR_helloworld);
+    }
+  </pre>
+  
+  <p>
+    To compile this program with the name
+    <span class="bash">sys_hello_caller</span>, <span class="bash">cd</span> to
+    the directory where you saved the program (anywhere you have privileges,
+    really) and call the following command:
+  </p>
+  
+  <pre>
+    gcc -o sys_hello_caller sys_hello_caller.c
+  </pre>
+  
+  <h2>Step 13: Run your system call and verify that it works</h2>
 
 </body>
 </html>
