@@ -1,10 +1,16 @@
+/**
+ * mysh.c
+ *
+ * Don Rowe, CMSI 387
+ * Assignment 0320
+ */
+
 #include <sys/types.h>
 #include <stdio.h>
 #include <unistd.h>
 
 /**
- * This program demonstrates the use of the fork() and exec()
- * functions.
+ * This program is a terminal shell for Linux
  */
 int main() {
     
@@ -25,6 +31,8 @@ int main() {
         /* Get the command from the user */
         printf("Enter the command to run: ");
         scanf_code = scanf("%s", command);
+            //test:
+            //printf("scanf_code: %d\n", scanf_code);
         
         /* If the user types ctrl-D, just quit */
         if (scanf_code == EOF) {
