@@ -7,30 +7,38 @@
  * functions.
  */
 int main() {
-    /* String to hold the command to run. */
-    char command[256];
-    printf("Enter the command to run: ");
-    scanf("%s", command);
-
+    
     /* Variable that will store the fork result. */
     pid_t pid;
+    
+    /* String to hold the command to run. */
+    char command[256];
+    
+    /* The int that should be used to hold the status from the wait call */
+    int result;
+    
+    /* The code that scanf returns, e.g., EOF */
+    int scanf_code;
+    
+    do {
+        printf("Enter the command to run: ");
+        scanf_code = scanf("%s", command);
+        
+        /* If the user types ctrl-D, just quit */
+        if (scanf_code == EOF) {
+            printf("\n");
+            return 0;
+        }
 
-    /* Perform the actual fork. */
-    pid = fork();
-    if (pid < 0) {
-        /* Error condition. */
-        fprintf(stderr, "Fork failed\n");
-        return -1;
-    } else if (pid == 0) {
-        /* Child process. */
-        printf("Running...\n");
-        execlp(command, command, NULL);
-    } else {
-        /* Parent process. */
-        int result;
-        wait(&result);
-        printf("All done; result = %d\n", result);
-    }
+        /* Perform the actual fork */
+        pid = fork();
+        
+        /* If this is the parent process, wait on the child */
+        if (pid > 0) { 
+            wait(&result);
+        }
+        
+    } while (pid > 0);
 
     return 0;
 }
