@@ -23,6 +23,9 @@ int main() {
     /* String to hold the command to run. */
     char command[256];
     
+    /* Array of strings, representing first the command and then the args */
+    char* tokens;
+    
     /* String to hold the new directory */
     char new_dir[253];
     
@@ -36,6 +39,8 @@ int main() {
         
         /* Get the command from the user */
         printf("Enter the command to run: ");
+        /* FIXME: This needs to be looped through to get successive tokens.
+           presently it only gets the first */
         scanf_code = scanf("%s", command);
             //test:
             //printf("scanf_code: %d\n", scanf_code);
@@ -51,6 +56,8 @@ int main() {
          * directory. Do not fork a new process--just start the read loop over.
          *
          * TODO: allow whitespace before the cd command
+         * FIXME: This is all wrong--everything gets tokenized by whitespace,
+         * not just by line breaks.
          */
         if (strncmp(CHANGE_DIR_COMMAND, command, 3) == 0) {
                 //test:
@@ -86,6 +93,8 @@ int main() {
     
     /* If this is the child process, run the command the user passed to it */
     if (pid == 0) {
+        /* FIXME: be able to handle an arbitrary number of args:
+           use execvp() instead */
         execlp(command, command, NULL);
     }
 
