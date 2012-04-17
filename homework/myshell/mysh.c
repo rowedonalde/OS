@@ -21,6 +21,8 @@ int main() {
     int scanf_code;
     
     do {
+        
+        /* Get the command from the user */
         printf("Enter the command to run: ");
         scanf_code = scanf("%s", command);
         
@@ -39,6 +41,11 @@ int main() {
         }
         
     } while (pid > 0);
+    
+    /* If this is the child process, run the command the user passed to it */
+    if (pid == 0) {
+        execlp(command, command, NULL);
+    }
 
     return 0;
 }
