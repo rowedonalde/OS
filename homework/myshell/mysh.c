@@ -11,6 +11,7 @@
 #include <string.h>
 
 #define CHANGE_DIR_COMMAND "cd "
+#define MAX_TOKEN_LENGTH 256
 
 /**
  * This program is a terminal shell for Linux
@@ -21,13 +22,13 @@ int main() {
     pid_t pid;
     
     /* String to hold the command to run. */
-    char command[256];
+    char command[MAX_TOKEN_LENGTH];
     
-    /* Array of strings, representing first the command and then the args */
-    char* tokens;
+    /* Array of strings the args */
+    char** tokens[MAX_TOKEN_LENGTH];
     
     /* String to hold the new directory */
-    char new_dir[253];
+    //char new_dir[253];
     
     /* The int that should be used to hold the status from the wait call */
     int result;
