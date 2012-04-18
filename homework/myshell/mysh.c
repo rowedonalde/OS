@@ -21,11 +21,17 @@ int main() {
     /* Variable that will store the fork result. */
     pid_t pid;
     
+    /* Raw input from the user, before tokenizing */
+    char raw_input[MAX_TOKEN_LENGTH];
+    
     /* String to hold the command to run. */
     char command[MAX_TOKEN_LENGTH];
     
-    /* Array of strings the args */
-    char** tokens[MAX_TOKEN_LENGTH];
+    /* Array of strings, each an argument */
+    char** args[MAX_TOKEN_LENGTH];
+    
+    /* Number of arguments to the present command */
+    int args_len;
     
     /* String to hold the new directory */
     //char new_dir[253];
@@ -38,19 +44,27 @@ int main() {
     
     do {
         
+        /*Initialize the number of args for this command */
+        args_len = 0;
+        
         /* Get the command from the user */
         printf("Enter the command to run: ");
         /* FIXME: This needs to be looped through to get successive tokens.
            presently it only gets the first */
-        scanf_code = scanf("%s", command);
-            //test:
-            //printf("scanf_code: %d\n", scanf_code);
+           
+        /* Get the raw input*/
+        //scanf_code = scanf("%s", command);
+        fgets(raw_input, MAX_TOKEN_LENGTH, STDIN);
         
         /* If the user types ctrl-D, just quit */
-        if (scanf_code == EOF) {
+        if (strspn(EOF, raw_input) {
             printf("\n");
             return 0;
         }
+            
+        /*Loop through and add arguments to the list */
+        
+        
         
         /* 
          * If the user types a command beginning with "cd" change to that
