@@ -45,13 +45,15 @@ int main() {
     /* Loop counter */
     int i;
     
-    //char eof_str[1];
-    //eof_str[0] = EOF;
+    /* Boolean int to indicate whether the child process should run
+       concurrently*/
+    int concurrent;
     
     do {
         
-        /*Initialize the number of args for this command */
+        /*Initialize the number of args and concurrent flag for this command */
         args_count = 0;
+        concurrent = 0;
         
         /* Get the command from the user */
         printf("%s> ", getwd(current_dir));
@@ -76,8 +78,6 @@ int main() {
         while (args[args_count + 1] = strtok(NULL, " \n")) {
             args_count++;
         }
-            //test:
-            //printf("got here \n");
         
         /* 
          * If the user types a command beginning with "cd" change to that
@@ -95,28 +95,24 @@ int main() {
             pid = 1;
             continue;
         }
-          
+        
+        /* Set the concurrent flag to 1 if necessary */
+        if (args_count > 0 && args[args_count][0] == '&') {
+            concurrent = 1;
+            /* remove the "&" from args */
+            args[args_count] = NULL;
+            printf("Character is %s\n", args[args_count]);
+        }
  
         /* Perform the actual fork */
         pid = fork();
-            //test:
-            //printf("my pid is %d\n", pid);
         
         /* If this is the parent process, wait on the child */
         if (pid > 0) {
             /* If the final "arg" is "&", let the program run concurrently */
-            if (strlen(args[args_count]) == 1 && args[args_count][0] == '&') {
-                    test:
-                    printf("& char detected!\n");
-                /* remove the "&" from args */
-                args[args_count] = NULL;
-            } else {
-                    //test:
-                    //printf("& char detected!\n");
+            if (!concurrent) {
                 wait(&result);
             }
-            //wait(&result);
-            
         }
         
     } while (pid > 0);
