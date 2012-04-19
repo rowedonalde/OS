@@ -59,18 +59,26 @@ int main() {
         fgets(raw_input, MAX_TOKEN_LENGTH, stdin);
         
         /* If the user types ctrl-D, just quit */
-         if (feof(stdin)) {   
-             printf("\n");
-             return 0;
-         }
+        if (feof(stdin)) {   
+            printf("\n");
+            return 0;
+        }
         
-        /* Get the command */
+        /* If the use */
+        
+        /* Get the command. If the user inputs a null string or whitespace,
+           just jump back to the beginning */
         args[0] = strtok(raw_input, " \n");
+        if (args[0] == NULL) {
+            continue;
+        }
             
         /*Loop through and add arguments to the list */
         while (args[args_count + 1] = strtok(NULL, " \n")) {
             args_count++;
         }
+            //test:
+            printf("got here \n");
         
         /* 
          * If the user types a command beginning with "cd" change to that
@@ -98,8 +106,18 @@ int main() {
         /* If this is the parent process, wait on the child */
         if (pid > 0) {
             /* If the final "arg" is "&", let the program run concurrently */
-            if (args
+//             if (strlen(args[args_count]) == 1 && args[args_count][0] == '&') {
+//                     test:
+//                     printf("& char detected!\n");
+//                 /* remove the "&" from args */
+//                 args[args_count] = NULL;
+//             } else {
+//                     //test:
+//                     //printf("& char detected!\n");
+//                 wait(&result);
+//             }
             wait(&result);
+            
         }
         
     } while (pid > 0);
