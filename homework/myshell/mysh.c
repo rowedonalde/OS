@@ -53,7 +53,7 @@ int main() {
         args_count = 0;
         
         /* Get the command from the user */
-        printf("Enter the command to run: ");
+        printf("%s> ", getwd(current_dir));
            
         /* Get the raw input*/
         fgets(raw_input, MAX_TOKEN_LENGTH, stdin);
@@ -63,8 +63,6 @@ int main() {
             printf("\n");
             return 0;
         }
-        
-        /* If the use */
         
         /* Get the command. If the user inputs a null string or whitespace,
            just jump back to the beginning */
@@ -78,7 +76,7 @@ int main() {
             args_count++;
         }
             //test:
-            printf("got here \n");
+            //printf("got here \n");
         
         /* 
          * If the user types a command beginning with "cd" change to that
