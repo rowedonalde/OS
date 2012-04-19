@@ -58,10 +58,10 @@ int main() {
         fgets(raw_input, MAX_TOKEN_LENGTH, stdin);
         
         /* If the user types ctrl-D, just quit */
-//         if (strspn(eof_str, raw_input)) {
-//             printf("\n");
-//             return 0;
-//         }
+         if (feof(stdin)) {   
+             printf("\n");
+             return 0;
+         }
         
         /* Get the command */
         args[0] = strtok(raw_input, " \n");
