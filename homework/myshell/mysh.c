@@ -56,7 +56,7 @@ int main() {
         concurrent = 0;
         
         /* Get the command from the user */
-        printf("%s> ", getwd(current_dir));
+        printf("%s> ", getcwd(current_dir, MAX_TOKEN_LENGTH));
            
         /* Get the raw input*/
         fgets(raw_input, MAX_TOKEN_LENGTH, stdin);
@@ -87,7 +87,7 @@ int main() {
             
             /* Change to new dir */
             if (chdir(args[1]) == 0) {
-                printf("New working directory: %s\n", getwd(current_dir));
+                printf("New working directory: %s\n", getcwd(current_dir, MAX_TOKEN_LENGTH));
             } else {
                 printf("There was an error in changing the working directory!\n");
             }
