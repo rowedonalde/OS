@@ -6,6 +6,7 @@
  */
 
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -44,8 +45,8 @@ int main() {
     /* Loop counter */
     int i;
     
-    char eof_str[1];
-    eof_str[0] = EOF;
+    //char eof_str[1];
+    //eof_str[0] = EOF;
     
     do {
         
@@ -60,7 +61,7 @@ int main() {
         
         /* If the user types ctrl-D, just quit */
         if (feof(stdin)) {   
-            printf("\n");
+            printf("Goodbye!\n");
             return 0;
         }
         
@@ -104,17 +105,17 @@ int main() {
         /* If this is the parent process, wait on the child */
         if (pid > 0) {
             /* If the final "arg" is "&", let the program run concurrently */
-//             if (strlen(args[args_count]) == 1 && args[args_count][0] == '&') {
-//                     test:
-//                     printf("& char detected!\n");
-//                 /* remove the "&" from args */
-//                 args[args_count] = NULL;
-//             } else {
-//                     //test:
-//                     //printf("& char detected!\n");
-//                 wait(&result);
-//             }
-            wait(&result);
+            if (strlen(args[args_count]) == 1 && args[args_count][0] == '&') {
+                    test:
+                    printf("& char detected!\n");
+                /* remove the "&" from args */
+                args[args_count] = NULL;
+            } else {
+                    //test:
+                    //printf("& char detected!\n");
+                wait(&result);
+            }
+            //wait(&result);
             
         }
         
