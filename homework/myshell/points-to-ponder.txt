@@ -4,3 +4,11 @@ points-to-ponder.txt
    dedicated executable cd--cd is just a special command that tells bash to
    call the POSIX API function chdir(). Since cd is not a program in the system
    mysh has to look for it as a special case of input.
+
+2. mysh can run a script so long as there is a separate executable like python,
+   perl, or even bash to do so--mysh just specifies the interpreter in the
+   first command and the script and possible arguments afterward. As for
+   scripts like those that bash runs, mysh cannot run these independently. mysh
+   would need to have extra specialized parsing built in to handle *.sh
+   scripts.
+
