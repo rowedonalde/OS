@@ -31,8 +31,9 @@ int main() {
     /* Array of strings, each an argument */
     char* args[MAX_TOKEN_LENGTH];
     
-    /* Number of arguments to the present command */
-    int args_len;
+    /* Number of arguments to the present command,
+       NOT the length of array args */
+    int args_count;
     
     /* The int that should be used to hold the status from the wait call */
     int result;
@@ -49,7 +50,7 @@ int main() {
     do {
         
         /*Initialize the number of args for this command */
-        args_len = 0;
+        args_count = 0;
         
         /* Get the command from the user */
         printf("Enter the command to run: ");
@@ -67,16 +68,9 @@ int main() {
         args[0] = strtok(raw_input, " \n");
             
         /*Loop through and add arguments to the list */
-        while (args[args_len + 1] = strtok(NULL, " \n")) {
-            args_len++;
+        while (args[args_count + 1] = strtok(NULL, " \n")) {
+            args_count++;
         }
-        
-// test:
-//              printf("command: %s\n", command);
-//              printf("args:\n");
-//              for (i = 0; i < args_len; i++) {
-//                  printf("%s\n", args[i]);
-//              }
         
         /* 
          * If the user types a command beginning with "cd" change to that
@@ -102,16 +96,19 @@ int main() {
             //printf("my pid is %d\n", pid);
         
         /* If this is the parent process, wait on the child */
-        if (pid > 0) { 
+        if (pid > 0) {
+            /* If the final "arg" is "&", let the program run concurrently */
+            if (args
             wait(&result);
         }
         
-     } while (pid > 0);
+    } while (pid > 0);
     
     /* If this is the child process, run the command the user passed to it */
     if (pid == 0) {
-        args[args_len + 1] = NULL;
-        if (args_len > 0) {
+        /* NULL string pointer terminates the array of args for execvp() */
+        args[args_count + 1] = NULL;
+        if (args_count > 0) {
             execvp(args[0], args);
         } else {
             execlp(args[0], args[0], NULL);
