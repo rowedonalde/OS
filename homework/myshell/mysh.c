@@ -42,6 +42,9 @@ int main() {
     /* Loop counter */
     int i;
     
+    char eof_str[1];
+    eof_str[0] = EOF;
+    
     do {
         
         /*Initialize the number of args for this command */
@@ -57,10 +60,10 @@ int main() {
         fgets(raw_input, MAX_TOKEN_LENGTH, stdin);
         
         /* If the user types ctrl-D, just quit */
-//         if (strspn(EOF, raw_input) {
-//             printf("\n");
-//             return 0;
-//         }
+        if (strspn(eof_str, raw_input)) {
+            printf("\n");
+            return 0;
+        }
         
         /* Get the command */
         command = strtok(raw_input, " ");
@@ -116,13 +119,13 @@ int main() {
 //         }
 //         
      } while (pid > 0);
-//     
-//     /* If this is the child process, run the command the user passed to it */
-//     if (pid == 0) {
-//         /* FIXME: be able to handle an arbitrary number of args:
-//            use execvp() instead */
-//         execlp(command, command, NULL);
-//    }
+    
+    /* If this is the child process, run the command the user passed to it */
+    if (pid == 0) {
+        /* FIXME: be able to handle an arbitrary number of args:
+           use execvp() instead */
+        execlp(command, command, NULL);
+   }
 
     return 0;
 }
