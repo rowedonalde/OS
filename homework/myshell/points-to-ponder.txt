@@ -1,1 +1,6 @@
 points-to-ponder.txt
+
+1. The cd command gets special command in this assignment because there is no
+   dedicated executable cd--cd is just a special command that tells bash to
+   call the POSIX API function chdir(). Since cd is not a program in the system
+   mysh has to look for it as a special case of input.
