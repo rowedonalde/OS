@@ -25,8 +25,8 @@ int main() {
     /* Raw input from the user, before tokenizing */
     char raw_input[MAX_TOKEN_LENGTH];
     
-    /* String to hold the command to run. */
-    char* command;
+    /* The new directory, when cd is called */
+    char* current_dir;
     
     /* Array of strings, each an argument */
     char* args[MAX_TOKEN_LENGTH];
@@ -82,20 +82,18 @@ int main() {
          * If the user types a command beginning with "cd" change to that
          * directory. Do not fork a new process--just start the read loop over.
          */
-//         if (strspn(CHANGE_DIR_COMMAND, command)) {
-//                 //test:
-//                 printf("cd command detected!\n");
-//             
-//             /* Change to new dir */
-//             if (chdir(args[0]) == 0) {
-//                 printf("New working directory: %s\n", args[0]);
-//             } else {
-//                 printf("There was an error in changing the working directory!\n");
-//             }
-//             
-//             pid = 1;
-//             continue;
-//         }
+        if (strspn(CHANGE_DIR_COMMAND, args[0])) {
+            
+            /* Change to new dir */
+            if (chdir(args[1]) == 0) {
+                printf("New working directory: %s\n", getwd(current_dir));
+            } else {
+                printf("There was an error in changing the working directory!\n");
+            }
+            
+            pid = 1;
+            continue;
+        }
           
  
         /* Perform the actual fork */
