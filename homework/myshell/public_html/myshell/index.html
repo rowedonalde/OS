@@ -94,7 +94,7 @@
   <p>
   
   <pre>
-    /home/your-name/mysh>
+    /home/yourname/mysh>
   </pre>
   
   <p>
@@ -122,7 +122,51 @@
     usually does.
   </p>
   
+  <h2>Step 5: Set the default shell to mysh for your user account</h2>
+  <p>
+    There are
+    <a href="http://myotragusbalearicus.wordpress.com/2012/01/12/change-default-shell-in-ubuntu/">two
+    main ways to change your default shell in Ubuntu</a>, but we'll do it
+    "by hand" to fully illustrate what's going on. Open the
+    <a href="http://en.wikipedia.org/wiki/Passwd_(file)">user accounts file</a>
+    with the following command:
+  </p>
   
+  <pre>
+    sudo gedit /etc/passwd
+  </pre>
+  
+  <p>
+    Note that you need root permission to edit
+    <span class="bash">/etc/passwd</span>&mdash;<span class="heydummy">THIS
+    FILE IS REALLY IMPORTANT!!!</span> Before you make any changes to it, you
+    should make a backup&mdash;saving a copy with the name
+    <span class="bash">passwd.bak</span> in the same directory should work
+    fine.
+  </p>
+  
+  <p>
+    Look for the line that defines options for your user account. If you didn't
+    add any other users to this machine after yours when you installed, it's
+    probably on the last line, and it should look something like this:
+  </p>
+  
+  <pre>
+    yourname:x:1000:1000:Firstname Lastname,,,:/home/yourname:/bin/bash
+  </pre>
+  
+  <p>
+    The last of the colon-delimited options defines your default shell, the one
+    that handles input and output via the terminal. It's probably
+    <span class="bash">/bin/bash</span> (though it could also be
+    <span class="bash">/bin/sh</span> or even
+    <span class="bash">/bin/dash</span>, depending on possible exotic user
+    settings&mdash;<a href="https://wiki.ubuntu.com/DashAsBinSh">Debian has
+    been changing things around recently with the system shell</a>). Change
+    this option to <span class="bash">/bin/mysh</span> to set your default
+    shell to <span class="bash">mysh</span>, save the file, log out, and log
+    back in to execute the change.
+  </p>
 </body>
 
 </html>
