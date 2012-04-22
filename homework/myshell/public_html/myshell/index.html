@@ -76,6 +76,34 @@
     <a href="http://en.wikipedia.org/wiki/A.out">a convention which has been
     around since the first version of Unix in 1969</a>.
   </p>
+  
+  <h2>Step 3: Test the newly compiled mysh</h2>
+  <p>
+    Before you go all out and set <span class="bash">mysh</span> as your
+    default shell, you should test it out. Assuming that you're in the
+    directory where you compiled it, start it up with the following command:
+  </p>
+  
+  <pre>
+    ./mysh
+  </pre>
+  
+  <p>
+    You should now see your usual <span class="bash">bash</span> prompt
+    replaced with
+  <p>
+  
+  <pre>
+    /home/your-name/mysh>
+  </pre>
+  
+  <p>
+    or whichever your current directory is. Try a few usual commands
+    (<span class="bash">pwd</span>, <span class="bash">ls</span>,
+    maybe even <span class="bash">bash</span>) and ensure that they do what
+    they usually do. The special case of <span class="bash">cd</span> should
+    print a message as to whether the directory change succeeded or failed.
+  </p>
 </body>
 
 </html>
