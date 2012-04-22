@@ -52,6 +52,30 @@
     save it in a new directory <span class="bash">~/mysh</span>, where
     <span class="bash">~</span> is your home directory.
   </p>
+  
+  <h2>Step 2: Compile mysh from source</h2>
+  <p>
+    Open up your terminal and <span class="bash">cd</span> to
+    <span class="bash">~/mysh</span> (or wherever you saved the source file
+    from Step 1). Build an executable with the name
+    <span class="bash">mysh</span> with the following command:
+  </p>
+  
+  <pre>
+    gcc -o mysh mysh.c
+  </pre>
+  
+  <p>
+    Unlike when you perhaps built the modified kernel from source with
+    <span class="bash">make</span>, here you use <span class="bash">gcc</span>
+    alone. The combination of the argument and option
+    <span class="bash">-o mysh</span> tell <span class="bash">gcc</span> to
+    name the resulting executable <span class="bash">mysh</span>. Without this
+    statement, the compiler will choose the name
+    <span class="bash">a.out</span> by default,
+    <a href="http://en.wikipedia.org/wiki/A.out">a convention which has been
+    around since the first version of Unix in 1969</a>.
+  </p>
 </body>
 
 </html>
