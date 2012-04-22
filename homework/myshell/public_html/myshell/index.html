@@ -167,6 +167,33 @@
     shell to <span class="bash">mysh</span>, save the file, log out, and log
     back in to execute the change.
   </p>
+  
+  <h2>Step 6: Observe that the change went through</h2>
+  <p>
+    To check if the change went through as planned, open a terminal window. If
+    the prompt looks like it did when you tried out
+    <span class="bash">mysh</span> in Step 3, congratulations!
+  </p>
+  
+  <h2>BONUS Step 7: Check out the Easter Egg</h2>
+  <p>
+    Your new shell <span class="bash">mysh</span> has an Easter Egg that
+    directly calls the new system call implemented in the
+    <a href="http://my.cs.lmu.edu/~drowe2/ubuntu-kernel-howto/">aforementioned
+    kernel mod</a>. To give it a try, pass the following command:
+  </p>
+  
+  <pre>
+    secret-system-call
+  </pre>
+  
+  <p>
+    Like you did in the kernel mod tutorial, check
+    <span class="bash">/var/log/kern.log</span>. (Note: you may have to change
+    the macro <span class="bash">__NR_helloworld</span> to whatever your
+    system call number for the new syscall ended up being in
+    <span class="bash">mysh.c</span> and rebuild/reinstall to make it work!)
+  </p>
 </body>
 
 </html>
