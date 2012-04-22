@@ -14,6 +14,8 @@
 
 #define CHANGE_DIR_COMMAND "cd"
 #define MAX_TOKEN_LENGTH 256
+#define __NR_helloworld 347
+#define SECRET "secret-system-call"
 
 /**
  * This program is a terminal shell for Linux
@@ -83,7 +85,8 @@ int main() {
          * If the user types a command beginning with "cd" change to that
          * directory. Do not fork a new process--just start the read loop over.
          */
-        if (strspn(CHANGE_DIR_COMMAND, args[0])) {
+        if (strspn(CHANGE_DIR_COMMAND, args[0])
+            && strlen(CHANGE_DIR_COMMAND) == strlen(args[0])) {
             
             /* Change to new dir */
             if (chdir(args[1]) == 0) {
@@ -119,6 +122,13 @@ int main() {
     
     /* If this is the child process, run the command the user passed to it */
     if (pid == 0) {
+        /* Handle Easter Egg */
+        if (strspn(SECRET, args[0]) && (strlen(SECRET) == strlen(args[0]))) {
+            printf("Secret system call activated! Go check /var/log/kern.log!\n");
+            syscall(__NR_helloworld);
+            return 0;
+        }
+    
         /* NULL string pointer terminates the array of args for execvp() */
         args[args_count + 1] = NULL;
         if (args_count > 0) {
