@@ -5,12 +5,18 @@ points-to-ponder.txt
    call the POSIX API function chdir(). Since cd is not a program in the system
    mysh has to look for it as a special case of input.
 
+# JD: Yes, that is true, but let's take it further---what if there *were*
+#     a cd executable?  Would it need special treatment *then*?
+
 2. mysh can run a script so long as there is a separate executable like python,
    perl, or even bash to do so--mysh just specifies the interpreter in the
    first command and the script and possible arguments afterward. As for
    scripts like those that bash runs, mysh cannot run these independently. mysh
    would need to have extra specialized parsing built in to handle *.sh
    scripts.
+
+# JD: For this question, let's just think of "scripts" as files containing
+#     executable commands.  Would mysh be able to run those?
 
 3. Ctrl-D exits the shell when it is waiting for a prompt. It does so by
    checking to see if strtok() returns a NULL string pointer. If strtok() does

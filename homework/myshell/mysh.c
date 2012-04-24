@@ -48,7 +48,7 @@ int main() {
     int i;
     
     /* Boolean int to indicate whether the child process should run
-       concurrently*/
+       concurrently */
     int concurrent;
     
     do {
@@ -140,3 +140,7 @@ int main() {
 
     return 0;
 }
+
+// JD: Wow, talk about better late than never.  This code is clean,
+//     functional, and pristine.  I have nothing further to say.
+//     Well done!
