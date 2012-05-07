@@ -37,10 +37,20 @@ void phloop(int phil, int total, float chance) {
         //Wait for chopsticks:
         if (phil % 2) { //true == 1 -> odd -> left first
             wait(chopstick[phil]);
+            printf("Philosopher %d has picked up chopstick %d\n", phil, phil);
+            print_status();
             wait(chopstick[(phil + 1) % total]);
+            printf("Philosopher %d has picked up chopstick %d\n", phil,
+                   (phil + 1) % total);
+            print_status();
         } else {
             wait(chopstick[(phil + 1) % total]);
+            printf("Philosopher %d has picked up chopstick %d\n", phil,
+                   (phil + 1) % total);
+            print_status();
             wait(chopstick[phil]);
+            printf("Philosopher %d has picked up chopstick %d\n", phil, phil);
+            print_status();
         }
         
         //Eat:
