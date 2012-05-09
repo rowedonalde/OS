@@ -8,6 +8,6 @@
 
 #define __PHILOSOPHER__
 
-void phloop(int phil, int total, float chance);
+void phloop(int phil, int total, int maxwait);
 
 #endif

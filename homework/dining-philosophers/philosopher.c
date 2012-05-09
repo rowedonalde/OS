@@ -6,6 +6,7 @@
 
 #include "chopstick.h"
 #include "sync.h"
+#include "utility.h"
 #include <unistd.h>
 #include <time.h>
 #include <stdio.h>
@@ -20,11 +21,13 @@
  * float chance: The likelihood that, after every second of thinking
  *               or eating, the philosopher will be done
  */
-void phloop(int phil, int total, float chance) {
+void phloop(int phil, int total, int maxwait) {
     int hungry = 0;
     while (1) {
         
         //Think:
+        randomwait(maxwait);
+        /*
         while (!hungry) {
             sleep(1);
             unsigned int eatseed = time();
@@ -34,6 +37,7 @@ void phloop(int phil, int total, float chance) {
                 hungry = 1;
             }
         }
+        */
         
         printf("Philosopher %d is hungry\n", phil);
         
@@ -57,6 +61,8 @@ void phloop(int phil, int total, float chance) {
         }
         
         //Eat:
+        randomwait(maxwait);
+        /*
         while (hungry) {
             sleep(1);
             unsigned int eatseed = time();
@@ -66,6 +72,7 @@ void phloop(int phil, int total, float chance) {
                 hungry = 0;
             }
         }
+        */
         
         printf("Philosopher %d is done eating\n", phil);
         
