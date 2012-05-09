@@ -1,18 +1,13 @@
 /**
  * Synchronization elements for a bounded buffer solution.
  */
-#ifndef __BB_SYNC__
-#define __BB_SYNC__
+#ifndef __PHIL_SYNC__
+#define __PHIL_SYNC__
 
 #include <pthread.h>
-#include <semaphore.h>
 
 //mutexes needs to be allocated in main()
 pthread_mutex_t *mutexes;
-sem_t *empty, *full;
-#ifndef __APPLE_CC__
-sem_t emptyHolder, fullHolder;
-#endif
 
 /**
  * Initializes synchronization primitives.
