@@ -18,22 +18,25 @@
  * wait() function used by a philosopher to wait until a given chopstick is
  * ready, after which the chopstick is marked as being held by that philosopher
  */
-void wait(int* chopstick, int phil) {
-    while (*chopstick > FREE) {
-        //wait
-    }
+void wait(int chopstick, int phil) {
+    
+    //Acquire the lock/wait for the chopstick:
+    pthread_mutex_lock(mutexes + chopstick * sizeof(pthread_mutex_t));
     
     //When done waiting, set the given chopstick to
     //the philosopher's ID:
-    *chopstick = phil;
+    chopsticks[chopstick] = phil;
 }
 
 /*
  * signal() function used by a philosopher to indicate that the given chopstick
  * is now available.
  */
-void signal(int* chopstick) {
-    *chopstick = FREE;
+void signal(int chopstick, int phil) {
+    chopsticks[chopstick] = FREE;
+    
+    //Release the lock for the chopstick:
+    pthread_mutex_unlock(mutexes + chopstick * sizeof(pthread_mutex_t));
 }
 
 
@@ -45,36 +48,36 @@ void signal(int* chopstick) {
  * If the philosopher to the right is holding it, it is represented as
  * a '>' character.
  */
-void print_status(int* chopstick, int total, int* waitlist) {
+void print_status(int total) {
     char *errormsg =
     "\n******ILLEGAL OPERATION! PHILOSOPHER %d IS HOLDING CHOPSTICK %d******\n";
 
     //Chopstick 0 is an edge case--the philosopher to the left
     //is philosopher total-1
     if (total > 0) {
-        if (chopstick[0] == 0) {
+        if (chopsticks[0] == 0) {
             printf(">0");
-        } else if (chopstick[0] == total - 1) {
+        } else if (chopsticks[0] == total - 1) {
             printf("<0");
-        } else if (chopstick[0] == FREE) {
+        } else if (chopsticks[0] == FREE) {
             printf("|0");
         } else {
-            printf(errormsg, chopstick[0], 0);
+            printf(errormsg, chopsticks[0], 0);
             exit(1);
         }
     }
     
     //The rest of the chopsticks:
     int i;
-    for (i = 1; i < total - 1; i++) {
-        if (chopstick[i] == i - 1) {
+    for (i = 1; i < total; i++) {
+        if (chopsticks[i] == i - 1) {
             printf("<%d", i);
-        } else if (chopstick[i] == i) {
+        } else if (chopsticks[i] == i) {
             printf(">%d", i);
-        } else if (chopstick[0] == FREE) {
+        } else if (chopsticks[0] == FREE) {
             printf("|%d", i);
         } else {
-            printf(errormsg, chopstick[i], i);
+            printf(errormsg, chopsticks[i], i);
             exit(1);
         }
     }
