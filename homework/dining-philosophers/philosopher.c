@@ -3,6 +3,8 @@
  */
 
 #include "philosopher.h"
+
+#include "chopstick.h"
 #include <unistd.h>
 #include <time.h>
 #include <stdio.h>
@@ -39,19 +41,19 @@ void phloop(int phil, int total, float chance, int* chopstick) {
         if (phil % 2) { //true == 1 -> odd -> left first
             wait(chopstick[phil], phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil, phil);
-            print_status();
+            print_status(chopstick, total);
             wait(chopstick[(phil + 1) % total], phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil,
                    (phil + 1) % total);
-            print_status();
+            print_status(chopstick, total);
         } else {
             wait(chopstick[(phil + 1) % total], phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil,
                    (phil + 1) % total);
-            print_status();
+            print_status(chopstick, total);
             wait(chopstick[phil], phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil, phil);
-            print_status();
+            print_status(chopstick, total);
         }
         
         //Eat:
