@@ -18,8 +18,9 @@
  *
  * int phil: this philosopher's id number
  * int total: how many philosophers there are
- * float chance: The likelihood that, after every second of thinking
- *               or eating, the philosopher will be done
+ * int maxwait: The maximum time that a philosopher can eat or think.
+ *     The length of each such waiting period will be a whole number
+ *     of seconds between 0 inclusive and maxwait exclusive.
  */
 void phloop(int phil, int total, int maxwait) {
     int hungry = 0;
@@ -27,17 +28,6 @@ void phloop(int phil, int total, int maxwait) {
         
         //Think:
         randomwait(maxwait);
-        /*
-        while (!hungry) {
-            sleep(1);
-            unsigned int eatseed = time();
-            //If a 0 is randomly generated in this turn, get hungry
-            //and break out of the loop:
-            if (!(int)((1 / chance) * rand() / RAND_MAX)) {
-                hungry = 1;
-            }
-        }
-        */
         
         printf("Philosopher %d is hungry\n", phil);
         
@@ -62,17 +52,6 @@ void phloop(int phil, int total, int maxwait) {
         
         //Eat:
         randomwait(maxwait);
-        /*
-        while (hungry) {
-            sleep(1);
-            unsigned int eatseed = time();
-            //If a 0 is randomly generated in this turn, get full
-            //and break out of the loop:
-            if (!(int)((1 / chance) * rand() / RAND_MAX)) {
-                hungry = 0;
-            }
-        }
-        */
         
         printf("Philosopher %d is done eating\n", phil);
         
