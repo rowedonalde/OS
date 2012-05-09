@@ -12,6 +12,6 @@ pthread_mutex_t *mutexes;
 /**
  * Initializes synchronization primitives.
  */
-void initSync(void);
+void initSync(int total);
 
 #endif
