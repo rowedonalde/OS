@@ -5,6 +5,7 @@
 #include "philosopher.h"
 
 #include "chopstick.h"
+#include "sync.h"
 #include <unistd.h>
 #include <time.h>
 #include <stdio.h>
@@ -18,9 +19,8 @@
  * int total: how many philosophers there are
  * float chance: The likelihood that, after every second of thinking
  *               or eating, the philosopher will be done
- * int* chopstick: The array of Chopsticks to use
  */
-void phloop(int phil, int total, float chance, int* chopstick) {
+void phloop(int phil, int total, float chance) {
     int hungry = 0;
     while (1) {
         
@@ -39,21 +39,21 @@ void phloop(int phil, int total, float chance, int* chopstick) {
         
         //Wait for chopsticks:
         if (phil % 2) { //true == 1 -> odd -> left first
-            wait(chopstick[phil], phil);
+            wait(phil, phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil, phil);
-            print_status(chopstick, total);
-            wait(chopstick[(phil + 1) % total], phil);
+            print_status(total);
+            wait((phil + 1) % total, phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil,
                    (phil + 1) % total);
-            print_status(chopstick, total);
+            print_status(total);
         } else {
-            wait(chopstick[(phil + 1) % total], phil);
+            wait((phil + 1) % total, phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil,
                    (phil + 1) % total);
-            print_status(chopstick, total);
-            wait(chopstick[phil], phil);
+            print_status(total);
+            wait(phil, phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil, phil);
-            print_status(chopstick, total);
+            print_status(total);
         }
         
         //Eat:
@@ -71,11 +71,11 @@ void phloop(int phil, int total, float chance, int* chopstick) {
         
         //Surrender chopsticks:
         if (phil % 2) { //true == 1 -> odd -> left first
-            signal(chopstick[phil]);
-            signal(chopstick[(phil + 1) % total]);
+            signal(phil, phil);
+            signal((phil + 1) % total, phil);
         } else {
-            signal(chopstick[(phil + 1) % total]);
-            signal(chopstick[phil]);
+            signal((phil + 1) % total, phil);
+            signal(phil, phil);
         }
     }
 }
