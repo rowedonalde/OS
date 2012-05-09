@@ -1,5 +1,8 @@
 /**
  * Utility implementation.
+ *
+ * Adapted from:
+ * github.com/dondi/bazaar/blob/master/bounded-buffer/utility.c
  */
 #include "utility.h"
 

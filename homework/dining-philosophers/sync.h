@@ -1,5 +1,8 @@
 /**
  * Synchronization elements for a bounded buffer solution.
+ *
+ * Adapted from:
+ * github.com/dondi/bazaar/blob/master/bounded-buffer/bb-sync.h
  */
 #ifndef __PHIL_SYNC__
 #define __PHIL_SYNC__

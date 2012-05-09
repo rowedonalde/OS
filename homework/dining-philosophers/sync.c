@@ -1,5 +1,8 @@
 /**
  * Synchronization primitive implementation.
+ *
+ * Adapted from:
+ * github.com/dondi/bazaar/blob/master/bounded-buffer/bb-sync.c
  */
 #include "sync.h"
 
