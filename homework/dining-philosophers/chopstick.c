@@ -60,6 +60,22 @@ void print_status(int* chopstick, int total, int* waitlist) {
             printf("|0");
         } else {
             printf(errormsg, chopstick[0], 0);
+            exit(1);
+        }
+    }
+    
+    //The rest of the chopsticks:
+    int i;
+    for (i = 1; i < total - 1; i++) {
+        if (chopstick[i] == i - 1) {
+            printf("<%d", i);
+        } else if (chopstick[i] == i) {
+            printf(">%d", i);
+        } else if (chopstick[0] == FREE) {
+            printf("|%d", i);
+        } else {
+            printf(errormsg, chopstick[i], i);
+            exit(1);
         }
     }
 }
