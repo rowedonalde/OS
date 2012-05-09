@@ -7,7 +7,8 @@
 #include <pthread.h>
 #include <semaphore.h>
 
-pthread_mutex_t mutex;
+//mutexes needs to be allocated in main()
+pthread_mutex_t *mutexes;
 sem_t *empty, *full;
 #ifndef __APPLE_CC__
 sem_t emptyHolder, fullHolder;
