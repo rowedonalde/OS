@@ -11,6 +11,9 @@
 
 #include "sync.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #define FREE -1
 
 

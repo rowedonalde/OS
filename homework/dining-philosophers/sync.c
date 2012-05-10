@@ -14,6 +14,6 @@
 void initSync(int total) {
     int i;
     for (i = 0; i < total; i++) {
-        pthread_mutex_init(&mutexes + i * sizeof(pthread_mutex_t), NULL);
+        pthread_mutex_init(mutexes + i * sizeof(pthread_mutex_t), NULL);
     }
 }
