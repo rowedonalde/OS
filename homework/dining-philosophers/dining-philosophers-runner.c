@@ -20,6 +20,8 @@
 void *runner(void* args);
 
 int main(int argc, char** argv) {
+    int i;
+    
     //Initial input validation:
     int total = atoi(argv[1]);
     int maxwait = atoi(argv[2]);
@@ -29,12 +31,20 @@ int main(int argc, char** argv) {
         return 1;
     }
     
+        //test:
+    
+    //Initialize the array of chopsticks:
+    chopsticks = malloc(total * sizeof(int));
+    for (i = 0; i < total; i++) {
+        chopsticks[i] = -1;
+    }
+    
     //Initialize the chopstick mutex array:
     mutexes = malloc(total * sizeof(pthread_mutex_t));
+    //Initialize the mutex locks:
+    initSync(total);
     
     //Initialize the philosopher loop threads:
-    int i;
-    
     pthread_t *tid;
     tid = malloc(total * sizeof(pthread_t));
     pthread_attr_t *attr;
@@ -46,6 +56,9 @@ int main(int argc, char** argv) {
     args[2] = maxwait;
     
     for (i = 0; i < total; i++) {
+            //test:
+            //printf("Got to top of thread init loop\n");
+            
         //Thread:
         pthread_attr_init(attr + i * sizeof(pthread_attr_t));
         args[0] = i;
@@ -53,6 +66,9 @@ int main(int argc, char** argv) {
                        attr + i * sizeof(pthread_attr_t),
                        runner,
                        args);
+        
+            //test:
+            //printf("Got to end of thread init loop #%d\n", i);
     }
     
     //Joins:
@@ -60,6 +76,7 @@ int main(int argc, char** argv) {
         pthread_join(*(tid + i * sizeof(pthread_t)), NULL);
     }
     
+    free(chopsticks);
     free(mutexes);
     free(tid);
     free(attr);
@@ -70,6 +87,8 @@ int main(int argc, char** argv) {
 
 void *runner(void* p) {
     int *args = p;
+        //test:
+        //printf("Initializing a new phloop\n");
     phloop(args[0], args[1], args[2]);
     
     pthread_exit(0);
