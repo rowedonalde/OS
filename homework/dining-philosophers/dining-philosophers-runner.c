@@ -31,8 +31,6 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-        //test:
-    
     //Initialize the array of chopsticks:
     chopsticks = malloc(total * sizeof(int));
     for (i = 0; i < total; i++) {
@@ -49,15 +47,8 @@ int main(int argc, char** argv) {
     tid = malloc(total * sizeof(pthread_t));
     pthread_attr_t *attr;
     attr = malloc(total * sizeof(pthread_attr_t));
-    //args to be passed to runner:
-    //int *args;
-    //args = malloc(3 * sizeof(int));
-    //args[1] = total;
-    //args[2] = maxwait;
     
     for (i = 0; i < total; i++) {
-            //test:
-            //printf("Got to top of thread init loop\n");
             
         //Thread:
         pthread_attr_init(attr + i * sizeof(pthread_attr_t));
@@ -72,9 +63,6 @@ int main(int argc, char** argv) {
                        attr + i * sizeof(pthread_attr_t),
                        runner,
                        args);
-        
-            //test:
-            //printf("Got to end of thread init loop #%d\n", i);
     }
     
     //Joins:
@@ -86,15 +74,13 @@ int main(int argc, char** argv) {
     free(mutexes);
     free(tid);
     free(attr);
-    //free(args);
     
     return 0;
 }
 
 void *runner(void* p) {
     int *args = p;
-        //test:
-        //printf("Initializing a new phloop\n");
+    
     phloop(args[0], args[1], args[2]);
     
     free(args);

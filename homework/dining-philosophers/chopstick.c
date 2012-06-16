@@ -22,22 +22,19 @@
  * ready, after which the chopstick is marked as being held by that philosopher
  */
 void wait(int chopstick, int phil) {
-        //test:
-        printf("Philosopher %d is trying to get the lock for chopstick %d\n",
-               phil, chopstick);
+    
+    printf("Philosopher %d is trying to get the lock for chopstick %d\n",
+           phil, chopstick);
     //Acquire the lock/wait for the chopstick:
-    //pthread_mutex_lock(mutexes + chopstick * sizeof(pthread_mutex_t));
     pthread_mutex_lock(&mutexes[chopstick]);
-        //test:
-        printf("Philosopher %d got the lock for chopstick %d\n",
-               phil, chopstick);
+    printf("Philosopher %d got the lock for chopstick %d\n",
+           phil, chopstick);
     
     //When done waiting, set the given chopstick to
     //the philosopher's ID:
     chopsticks[chopstick] = phil;
-        //test:
-        printf("Chopstick %d is registered with philosopher %d\n",
-               chopstick, phil);
+    printf("Chopstick %d is registered with philosopher %d\n",
+           chopstick, phil);
 }
 
 /*
@@ -48,7 +45,6 @@ void signal(int chopstick, int phil) {
     chopsticks[chopstick] = FREE;
     
     //Release the lock for the chopstick:
-    //pthread_mutex_unlock(mutexes + chopstick * sizeof(pthread_mutex_t));
     pthread_mutex_unlock(&mutexes[chopstick]);
     printf("Philosopher %d has released chopstick %d\n", phil, chopstick);
 }
