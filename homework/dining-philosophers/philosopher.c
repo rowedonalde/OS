@@ -23,16 +23,22 @@
  *     of seconds between 0 inclusive and maxwait exclusive.
  */
 void phloop(int phil, int total, int maxwait) {
+        //test:
+        //printf("Setting hungry to 0\n");
     int hungry = 0;
     while (1) {
         
         //Think:
+            //test:
+            //printf("Philosopher %d is waiting\n", phil);
         randomwait(maxwait);
         
         printf("Philosopher %d is hungry\n", phil);
         
         //Wait for chopsticks:
         if (phil % 2) { //true == 1 -> odd -> left first
+                //test:
+                printf("Philosopher %d wants to pick up a chopstick\n", phil);
             wait(phil, phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil, phil);
             print_status(total);
@@ -41,6 +47,8 @@ void phloop(int phil, int total, int maxwait) {
                    (phil + 1) % total);
             print_status(total);
         } else {
+                //test:
+                printf("Philosopher %d wants to pick up a chopstick\n", phil);
             wait((phil + 1) % total, phil);
             printf("Philosopher %d has picked up chopstick %d\n", phil,
                    (phil + 1) % total);
