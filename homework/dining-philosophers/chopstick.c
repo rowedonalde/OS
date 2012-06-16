@@ -48,7 +48,9 @@ void signal(int chopstick, int phil) {
     chopsticks[chopstick] = FREE;
     
     //Release the lock for the chopstick:
-    pthread_mutex_unlock(mutexes + chopstick * sizeof(pthread_mutex_t));
+    //pthread_mutex_unlock(mutexes + chopstick * sizeof(pthread_mutex_t));
+    pthread_mutex_unlock(&mutexes[chopstick]);
+    printf("Philosopher %d has released chopstick %d\n", phil, chopstick);
 }
 
 
