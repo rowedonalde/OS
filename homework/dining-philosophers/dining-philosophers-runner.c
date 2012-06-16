@@ -50,10 +50,10 @@ int main(int argc, char** argv) {
     pthread_attr_t *attr;
     attr = malloc(total * sizeof(pthread_attr_t));
     //args to be passed to runner:
-    int *args;
-    args = malloc(3 * sizeof(int));
-    args[1] = total;
-    args[2] = maxwait;
+    //int *args;
+    //args = malloc(3 * sizeof(int));
+    //args[1] = total;
+    //args[2] = maxwait;
     
     for (i = 0; i < total; i++) {
             //test:
@@ -61,7 +61,13 @@ int main(int argc, char** argv) {
             
         //Thread:
         pthread_attr_init(attr + i * sizeof(pthread_attr_t));
+        
+        //args to be passed to runner:
+        int *args;
+        args = malloc(3 * sizeof(int));
         args[0] = i;
+        args[1] = total;
+        args[2] = maxwait;
         pthread_create(tid + i * sizeof(pthread_t),
                        attr + i * sizeof(pthread_attr_t),
                        runner,
@@ -80,7 +86,7 @@ int main(int argc, char** argv) {
     free(mutexes);
     free(tid);
     free(attr);
-    free(args);
+    //free(args);
     
     return 0;
 }
@@ -90,6 +96,8 @@ void *runner(void* p) {
         //test:
         //printf("Initializing a new phloop\n");
     phloop(args[0], args[1], args[2]);
+    
+    free(args);
     
     pthread_exit(0);
 }
