@@ -93,4 +93,7 @@ void print_status(int total) {
             exit(1);
         }
     }
+    
+    //Print a newline:
+    printf("\n");
 }
