@@ -25,6 +25,7 @@ int main(int argc, char** argv) {
     //Initial input validation:
     int total = atoi(argv[1]);
     int maxwait = atoi(argv[2]);
+    // JD: ^You'll segfault above first before you get to the error message below.
     if (argc != 3 ||total <= 1 || maxwait <= 0) {
         printf("This program requires two arguments after the filename:\n");
         printf("an int n:n>1 number of philosophers and an int t:t>0 second wait bound.");
