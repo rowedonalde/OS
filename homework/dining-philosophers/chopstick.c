@@ -27,12 +27,17 @@ void wait(int chopstick, int phil) {
            phil, chopstick);
     //Acquire the lock/wait for the chopstick:
     pthread_mutex_lock(&mutexes[chopstick]);
+    // JD: ^Commenting this out should expose concurrency problems, but does not.
     printf("Philosopher %d got the lock for chopstick %d\n",
            phil, chopstick);
     
     //When done waiting, set the given chopstick to
     //the philosopher's ID:
     chopsticks[chopstick] = phil;
+    // JD: ^The check should happen here: prior to setting the chopstick state,
+    //      check its *current* state to make sure that another philosopher
+    //      isn't already holding it.  That would indicate that the critical
+    //      section was violated.
     printf("Chopstick %d is registered with philosopher %d\n",
            chopstick, phil);
 }
@@ -43,7 +48,10 @@ void wait(int chopstick, int phil) {
  */
 void signal(int chopstick, int phil) {
     chopsticks[chopstick] = FREE;
-    
+    // JD: ^An analogous check should happen here.  A philosopher should
+    //      not be able to free a chopstick that he/she does not already
+    //      have (again, this would be a critical section fail).
+
     //Release the lock for the chopstick:
     pthread_mutex_unlock(&mutexes[chopstick]);
     printf("Philosopher %d has released chopstick %d\n", phil, chopstick);
@@ -61,6 +69,11 @@ void signal(int chopstick, int phil) {
 void print_status(int total) {
     char *errormsg =
     "\n******ILLEGAL OPERATION! PHILOSOPHER %d IS HOLDING CHOPSTICK %d******\n";
+
+    // JD: Your error message here is noted, but hope you can see (based on
+    //     the above comments) how it is in the wrong place.  The issue is
+    //     not that the chopsticks array may hold bad values, it is that
+    //     the array might be changed at the wrong moment.
 
     //Chopstick 0 is an edge case--the philosopher to the left
     //is philosopher total-1
